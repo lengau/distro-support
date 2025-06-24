@@ -1,0 +1,346 @@
+{
+  "4.10": {
+    "distribution": "ubuntu",
+    "version": "4.10",
+    "begin_support": "2004-10-20",
+    "end_support": null,
+    "begin_dev": "2004-03-05",
+    "end_extended_support": null
+  },
+  "5.04": {
+    "distribution": "ubuntu",
+    "version": "5.04",
+    "begin_support": "2005-04-08",
+    "end_support": null,
+    "begin_dev": "2004-10-20",
+    "end_extended_support": null
+  },
+  "5.10": {
+    "distribution": "ubuntu",
+    "version": "5.10",
+    "begin_support": "2005-10-12",
+    "end_support": null,
+    "begin_dev": "2005-04-08",
+    "end_extended_support": null
+  },
+  "6.06": {
+    "distribution": "ubuntu",
+    "version": "6.06",
+    "begin_support": "2006-06-01",
+    "end_support": "2011-06-01",
+    "begin_dev": "2005-10-12",
+    "end_extended_support": null
+  },
+  "6.10": {
+    "distribution": "ubuntu",
+    "version": "6.10",
+    "begin_support": "2006-10-26",
+    "end_support": null,
+    "begin_dev": "2006-06-01",
+    "end_extended_support": null
+  },
+  "7.04": {
+    "distribution": "ubuntu",
+    "version": "7.04",
+    "begin_support": "2007-04-19",
+    "end_support": null,
+    "begin_dev": "2006-10-26",
+    "end_extended_support": null
+  },
+  "7.10": {
+    "distribution": "ubuntu",
+    "version": "7.10",
+    "begin_support": "2007-10-18",
+    "end_support": null,
+    "begin_dev": "2007-04-19",
+    "end_extended_support": null
+  },
+  "8.04": {
+    "distribution": "ubuntu",
+    "version": "8.04",
+    "begin_support": "2008-04-24",
+    "end_support": "2013-05-09",
+    "begin_dev": "2007-10-18",
+    "end_extended_support": null
+  },
+  "8.10": {
+    "distribution": "ubuntu",
+    "version": "8.10",
+    "begin_support": "2008-10-30",
+    "end_support": null,
+    "begin_dev": "2008-04-24",
+    "end_extended_support": null
+  },
+  "9.04": {
+    "distribution": "ubuntu",
+    "version": "9.04",
+    "begin_support": "2009-04-23",
+    "end_support": null,
+    "begin_dev": "2008-10-30",
+    "end_extended_support": null
+  },
+  "9.10": {
+    "distribution": "ubuntu",
+    "version": "9.10",
+    "begin_support": "2009-10-29",
+    "end_support": null,
+    "begin_dev": "2009-04-23",
+    "end_extended_support": null
+  },
+  "10.04": {
+    "distribution": "ubuntu",
+    "version": "10.04",
+    "begin_support": "2010-04-29",
+    "end_support": "2015-04-30",
+    "begin_dev": "2009-10-29",
+    "end_extended_support": null
+  },
+  "10.10": {
+    "distribution": "ubuntu",
+    "version": "10.10",
+    "begin_support": "2010-10-10",
+    "end_support": null,
+    "begin_dev": "2010-04-29",
+    "end_extended_support": null
+  },
+  "11.04": {
+    "distribution": "ubuntu",
+    "version": "11.04",
+    "begin_support": "2011-04-28",
+    "end_support": null,
+    "begin_dev": "2010-10-10",
+    "end_extended_support": null
+  },
+  "11.10": {
+    "distribution": "ubuntu",
+    "version": "11.10",
+    "begin_support": "2011-10-13",
+    "end_support": null,
+    "begin_dev": "2011-04-28",
+    "end_extended_support": null
+  },
+  "12.04": {
+    "distribution": "ubuntu",
+    "version": "12.04",
+    "begin_support": "2012-04-26",
+    "end_support": "2017-04-28",
+    "begin_dev": "2011-10-13",
+    "end_extended_support": "2019-04-26"
+  },
+  "12.10": {
+    "distribution": "ubuntu",
+    "version": "12.10",
+    "begin_support": "2012-10-18",
+    "end_support": null,
+    "begin_dev": "2012-04-26",
+    "end_extended_support": null
+  },
+  "13.04": {
+    "distribution": "ubuntu",
+    "version": "13.04",
+    "begin_support": "2013-04-25",
+    "end_support": null,
+    "begin_dev": "2012-10-18",
+    "end_extended_support": null
+  },
+  "13.10": {
+    "distribution": "ubuntu",
+    "version": "13.10",
+    "begin_support": "2013-10-17",
+    "end_support": null,
+    "begin_dev": "2013-04-25",
+    "end_extended_support": null
+  },
+  "14.04": {
+    "distribution": "ubuntu",
+    "version": "14.04",
+    "begin_support": "2014-04-17",
+    "end_support": "2019-04-25",
+    "begin_dev": "2013-10-17",
+    "end_extended_support": "2024-04-25"
+  },
+  "14.10": {
+    "distribution": "ubuntu",
+    "version": "14.10",
+    "begin_support": "2014-10-23",
+    "end_support": null,
+    "begin_dev": "2014-04-17",
+    "end_extended_support": null
+  },
+  "15.04": {
+    "distribution": "ubuntu",
+    "version": "15.04",
+    "begin_support": "2015-04-23",
+    "end_support": null,
+    "begin_dev": "2014-10-23",
+    "end_extended_support": null
+  },
+  "15.10": {
+    "distribution": "ubuntu",
+    "version": "15.10",
+    "begin_support": "2015-10-22",
+    "end_support": null,
+    "begin_dev": "2015-04-23",
+    "end_extended_support": null
+  },
+  "16.04": {
+    "distribution": "ubuntu",
+    "version": "16.04",
+    "begin_support": "2016-04-21",
+    "end_support": "2021-04-30",
+    "begin_dev": "2015-10-22",
+    "end_extended_support": "2026-04-23"
+  },
+  "16.10": {
+    "distribution": "ubuntu",
+    "version": "16.10",
+    "begin_support": "2016-10-13",
+    "end_support": null,
+    "begin_dev": "2016-04-21",
+    "end_extended_support": null
+  },
+  "17.04": {
+    "distribution": "ubuntu",
+    "version": "17.04",
+    "begin_support": "2017-04-13",
+    "end_support": null,
+    "begin_dev": "2016-10-13",
+    "end_extended_support": null
+  },
+  "17.10": {
+    "distribution": "ubuntu",
+    "version": "17.10",
+    "begin_support": "2017-10-19",
+    "end_support": null,
+    "begin_dev": "2017-04-13",
+    "end_extended_support": null
+  },
+  "18.04": {
+    "distribution": "ubuntu",
+    "version": "18.04",
+    "begin_support": "2018-04-26",
+    "end_support": "2023-05-31",
+    "begin_dev": "2017-10-19",
+    "end_extended_support": "2028-04-26"
+  },
+  "18.10": {
+    "distribution": "ubuntu",
+    "version": "18.10",
+    "begin_support": "2018-10-18",
+    "end_support": null,
+    "begin_dev": "2018-04-26",
+    "end_extended_support": null
+  },
+  "19.04": {
+    "distribution": "ubuntu",
+    "version": "19.04",
+    "begin_support": "2019-04-18",
+    "end_support": null,
+    "begin_dev": "2018-10-18",
+    "end_extended_support": null
+  },
+  "19.10": {
+    "distribution": "ubuntu",
+    "version": "19.10",
+    "begin_support": "2019-10-17",
+    "end_support": null,
+    "begin_dev": "2019-04-18",
+    "end_extended_support": null
+  },
+  "20.04": {
+    "distribution": "ubuntu",
+    "version": "20.04",
+    "begin_support": "2020-04-23",
+    "end_support": "2025-05-29",
+    "begin_dev": "2019-10-17",
+    "end_extended_support": "2030-04-23"
+  },
+  "20.10": {
+    "distribution": "ubuntu",
+    "version": "20.10",
+    "begin_support": "2020-10-22",
+    "end_support": null,
+    "begin_dev": "2020-04-23",
+    "end_extended_support": null
+  },
+  "21.04": {
+    "distribution": "ubuntu",
+    "version": "21.04",
+    "begin_support": "2021-04-22",
+    "end_support": null,
+    "begin_dev": "2020-10-22",
+    "end_extended_support": null
+  },
+  "21.10": {
+    "distribution": "ubuntu",
+    "version": "21.10",
+    "begin_support": "2021-10-14",
+    "end_support": null,
+    "begin_dev": "2021-04-22",
+    "end_extended_support": null
+  },
+  "22.04": {
+    "distribution": "ubuntu",
+    "version": "22.04",
+    "begin_support": "2022-04-21",
+    "end_support": "2027-06-01",
+    "begin_dev": "2021-10-14",
+    "end_extended_support": "2032-04-21"
+  },
+  "22.10": {
+    "distribution": "ubuntu",
+    "version": "22.10",
+    "begin_support": "2022-10-20",
+    "end_support": null,
+    "begin_dev": "2022-04-21",
+    "end_extended_support": null
+  },
+  "23.04": {
+    "distribution": "ubuntu",
+    "version": "23.04",
+    "begin_support": "2023-04-20",
+    "end_support": null,
+    "begin_dev": "2022-10-20",
+    "end_extended_support": null
+  },
+  "23.10": {
+    "distribution": "ubuntu",
+    "version": "23.10",
+    "begin_support": "2023-10-12",
+    "end_support": null,
+    "begin_dev": "2023-04-20",
+    "end_extended_support": null
+  },
+  "24.04": {
+    "distribution": "ubuntu",
+    "version": "24.04",
+    "begin_support": "2024-04-25",
+    "end_support": "2029-05-31",
+    "begin_dev": "2023-10-12",
+    "end_extended_support": "2034-04-25"
+  },
+  "24.10": {
+    "distribution": "ubuntu",
+    "version": "24.10",
+    "begin_support": "2024-10-10",
+    "end_support": null,
+    "begin_dev": "2024-04-25",
+    "end_extended_support": null
+  },
+  "25.04": {
+    "distribution": "ubuntu",
+    "version": "25.04",
+    "begin_support": "2025-04-17",
+    "end_support": null,
+    "begin_dev": "2024-10-10",
+    "end_extended_support": null
+  },
+  "25.10": {
+    "distribution": "ubuntu",
+    "version": "25.10",
+    "begin_support": "2025-10-09",
+    "end_support": null,
+    "begin_dev": "2025-04-17",
+    "end_extended_support": null
+  }
+}
