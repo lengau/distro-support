@@ -4,6 +4,13 @@ from distro_support._distro import SupportRange
 from distro_support.errors import NoDevelopmentInfoError, NoESMInfoError
 
 
+EMPTY_DISTRO = SupportRange(
+    distribution="empty",
+    version="0",
+    begin_support=None,
+    end_support=None,
+    begin_dev=datetime.date(1, 1, 1),
+)
 BASIC_DISTRO = SupportRange(
     distribution="basic",
     version="1",
@@ -46,6 +53,7 @@ SUPPORT_DATES = [
 
 @pytest.mark.parametrize(("date", "supported", "esm", "in_dev"), SUPPORT_DATES)
 def test_is_supported_on(date, supported, esm, in_dev):
+    assert not EMPTY_DISTRO.is_supported_on(date)
     assert BASIC_DISTRO.is_supported_on(date) == supported
     if not supported:
         assert not BASIC_DISTRO.is_supported_on(date)
@@ -63,6 +71,7 @@ def test_is_esm_on(date, supported, esm, in_dev):
 
 @pytest.mark.parametrize(("date", "supported", "esm", "in_dev"), SUPPORT_DATES)
 def test_is_dev_on(date, supported, esm, in_dev):
+    assert EMPTY_DISTRO.is_in_development_on(date)
     with pytest.raises(NoDevelopmentInfoError):
         BASIC_DISTRO.is_in_development_on(date)
     assert FULL_DISTRO.is_in_development_on(date) == in_dev

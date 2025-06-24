@@ -11,8 +11,8 @@ class SupportRange:
 
     distribution: str
     version: str
-    begin_support: datetime.date
-    end_support: datetime.date
+    begin_support: datetime.date | None
+    end_support: datetime.date | None
     begin_dev: datetime.date | None = None
     end_extended_support: datetime.date | None = None
 
@@ -25,7 +25,11 @@ class SupportRange:
         :param include_esm: Whether to include ESM support (default: False)
         :returns: Whether the product is supported on this date.
         """
-        if self.begin_support <= date <= self.end_support:
+        if self.begin_support is None:
+            return False
+        if self.begin_support <= date and (
+            self.end_support is None or date <= self.end_support
+        ):
             return True
         if not include_esm or self.end_extended_support is None:
             return False
@@ -37,12 +41,16 @@ class SupportRange:
         """Determine whether this item is still in development on the given date."""
         if self.begin_dev is None:
             raise NoDevelopmentInfoError(self)
-        return self.begin_dev <= date < self.begin_support
+        return self.begin_dev <= date and (
+            self.begin_support is None or date < self.begin_support
+        )
 
     def is_esm_on(self, date: datetime.date) -> bool:
         if self.end_extended_support is None:
             raise NoESMInfoError(self)
-        return self.end_support < date <= self.end_extended_support
+        return date <= self.end_extended_support and (
+            self.end_support is None or date > self.end_support
+        )
 
     @classmethod
     def from_json(cls, data: dict[str, str]) -> Self:
