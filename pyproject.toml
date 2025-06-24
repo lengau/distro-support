@@ -1,0 +1,30 @@
+[project]
+name = "distro-support"
+dynamic = ["version"]
+description = "Get information about support dates for Linux distributions"
+readme = "README.md"
+authors = [
+    { name = "Alex Lowe", email = "alex@lowe.dev" }
+]
+requires-python = ">=3.8"
+dependencies = []
+
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.5",
+]
+lint = []
+types = [
+    "mypy[reports]>=1.14.1",
+]
+
+[tool.hatch.version]
+source = "vcs"
+tag-pattern = "(?P<version>\\d{4}\\.\\d\\d\\.\\d\\d)"
+
+[tool.hatch.version.vcs]
+version-file = "_version.py"
