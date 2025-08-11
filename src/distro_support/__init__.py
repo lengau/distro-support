@@ -14,7 +14,7 @@ def get_support_range(
 
     distro_data = json.loads(distro_file.read_text())
     if version in distro_data:
-        return SupportRange(**distro_data[version])
+        return SupportRange.from_json(distro_data[version])
     if not get_online:
         raise UnknownVersionError(distribution, version)
 
@@ -22,5 +22,5 @@ def get_support_range(
 
     distro_data = distro_mod.get_distro_info()
     if version in distro_data:
-        return SupportRange(**distro_data[version])
+        return SupportRange.from_json(distro_data[version])
     raise UnknownVersionError(distribution, version)

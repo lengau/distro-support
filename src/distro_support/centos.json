@@ -1,0 +1,50 @@
+{
+  "3": {
+    "distribution": "centos",
+    "version": "3",
+    "begin_support": "2004-03-19",
+    "end_support": "2006-07-20",
+    "begin_dev": null,
+    "end_extended_support": "2010-10-31"
+  },
+  "4": {
+    "distribution": "centos",
+    "version": "4",
+    "begin_support": "2005-03-09",
+    "end_support": "2009-03-31",
+    "begin_dev": null,
+    "end_extended_support": "2012-02-29"
+  },
+  "5": {
+    "distribution": "centos",
+    "version": "5",
+    "begin_support": "2007-04-12",
+    "end_support": "2014-01-31",
+    "begin_dev": null,
+    "end_extended_support": "2017-03-31"
+  },
+  "6": {
+    "distribution": "centos",
+    "version": "6",
+    "begin_support": "2011-11-27",
+    "end_support": "2017-05-10",
+    "begin_dev": null,
+    "end_extended_support": "2020-11-30"
+  },
+  "7": {
+    "distribution": "centos",
+    "version": "7",
+    "begin_support": "2014-07-07",
+    "end_support": "2020-08-06",
+    "begin_dev": null,
+    "end_extended_support": "2024-06-30"
+  },
+  "8": {
+    "distribution": "centos",
+    "version": "8",
+    "begin_support": "2019-09-24",
+    "end_support": "2021-12-31",
+    "begin_dev": null,
+    "end_extended_support": null
+  }
+}
