@@ -24,7 +24,7 @@ types = [
 
 [tool.hatch.version]
 source = "vcs"
-tag-pattern = "(?P<version>\\d{4}\\.\\d\\d)"
+tag-pattern = "(?P<version>\\d{4}\\.\\d\\d\\.\\d\\d)"
 
 [tool.hatch.version.vcs]
 version-file = "_version.py"
