@@ -1,7 +1,7 @@
 # Common items for all Starcraft Makefiles. Should only be edited in the `starbase` repository:
 # https://github.com/canonical/starbase
 
-SOURCES=$(wildcard *.py) $(PROJECT) tests
+SOURCES=$(wildcard *.py) src/$(PROJECT) tests
 DOCS=docs
 DOCS_OUTPUT=$(DOCS)/_build
 
@@ -14,7 +14,7 @@ else
 	APT := apt-get
 endif
 
-PRETTIER=npm exec --package=prettier -- prettier --log-level warn
+PRETTIER=npm exec --package=prettier@3.6.0 -- prettier --log-level warn
 PRETTIER_FILES="**/*.{yaml,yml,json,json5,css,md}"
 
 # Cutoff (in seconds) before a test is considered slow by pytest
