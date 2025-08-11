@@ -64,5 +64,5 @@ class SupportRange:
             else datetime.date.fromisoformat(data["begin_dev"]),
             end_extended_support=None
             if "end_extended_support" not in data
-            else datetime.date.fromisoformat(data["begin_dev"]),
+            else datetime.date.fromisoformat(data["end_extended_support"]),
         )
