@@ -131,7 +131,7 @@ lint-mypy:  ##- Check types with mypy
 ifneq ($(CI),)
 	@echo ::group::$@
 endif
-	uv run mypy --show-traceback --show-error-codes $(PROJECT)
+	uv run mypy --show-traceback --show-error-codes $(SOURCES)
 ifneq ($(CI),)
 	@echo ::endgroup::
 endif
