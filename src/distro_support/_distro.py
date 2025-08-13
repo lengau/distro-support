@@ -57,12 +57,16 @@ class SupportRange:
         return cls(
             distribution=data["distribution"],
             version=data["version"],
-            begin_support=datetime.date.fromisoformat(data["begin_support"]),
-            end_support=datetime.date.fromisoformat(data["end_support"]),
+            begin_support=None
+            if data.get("begin_support") is None
+            else datetime.date.fromisoformat(data["begin_support"]),
+            end_support=None
+            if data.get("end_support") is None
+            else datetime.date.fromisoformat(data["end_support"]),
             begin_dev=None
-            if "begin_dev" not in data
+            if data.get("begin_dev") is None
             else datetime.date.fromisoformat(data["begin_dev"]),
             end_extended_support=None
-            if "end_extended_support" not in data
+            if data.get("end_extended_support") is None
             else datetime.date.fromisoformat(data["end_extended_support"]),
         )
