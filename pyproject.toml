@@ -7,7 +7,9 @@ authors = [
     { name = "Alex Lowe", email = "alex@lowe.dev" }
 ]
 requires-python = ">=3.8"
-dependencies = []
+dependencies = [
+    "typing-extensions>=4.13.2",
+]
 
 [build-system]
 requires = ["hatchling", "hatch-vcs"]
@@ -22,6 +24,7 @@ lint = []
 types = [
     "mypy[reports]>=1.14.1",
 ]
+docs = []
 
 [tool.hatch.version]
 source = "vcs"
