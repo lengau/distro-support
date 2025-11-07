@@ -24,11 +24,27 @@ jobs:
     steps:
       - name: Install the latest version of uv
         uses: astral-sh/setup-uv@v7
+      - name: Checkout the source
+        uses: actions/checkout@v4
       - name: 🔄 Sync metadata files
-        uses: snapcrafters/ci/sync-version@main
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
-          update-script: |
-            make setup
-            uv run ./tools/update.py
+        run: |
+          make setup
+          uv run ./tools/update.py
+      - name: Check for modified files
+        shell: bash
+        id: git-check
+        run: |
+          MODIFIED=$([ -z "$(git status --porcelain)" ] && echo "false" || echo "true")
+          echo "modified=$MODIFIED" >> "$GITHUB_OUTPUT"
+      - name: Commit changes
+        if: steps.git-check.outputs.modified == 'true'
+        shell: bash
+        run: |
+          make format
+          git add **.json
+          uvx pre-commit run
+          git add **.json
+          git config --global user.name "Update bot"
+          git config --global user.email "update[bot]@github.com"
+          git commit -am "chore: update metadata files"
+          git push
