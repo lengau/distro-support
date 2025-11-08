@@ -99,7 +99,7 @@ format-ruff: install-ruff  ##- Automatically format with ruff
 
 .PHONY: format-codespell
 format-codespell:  ##- Fix spelling issues with codespell
-	uv run codespell --toml pyproject.toml --write-changes $(SOURCES)
+	codespell --toml pyproject.toml --write-changes $(SOURCES)
 
 .PHONY: format-prettier
 format-prettier: install-npm  ##- Format files with prettier
@@ -121,7 +121,7 @@ lint-codespell: install-codespell  ##- Check spelling with codespell
 ifneq ($(CI),)
 	@echo ::group::$@
 endif
-	uv run codespell --toml pyproject.toml $(SOURCES)
+	codespell --toml pyproject.toml $(SOURCES)
 ifneq ($(CI),)
 	@echo ::endgroup::
 endif
