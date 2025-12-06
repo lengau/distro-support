@@ -42,7 +42,7 @@ jobs:
         run: |
           make format
           git add **.json
-          uvx pre-commit run
+          uvx pre-commit run || true
           git add **.json
           git config --global user.name "Update bot"
           git config --global user.email "update[bot]@github.com"
