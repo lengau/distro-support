@@ -98,7 +98,7 @@ format-ruff: install-ruff  ##- Automatically format with ruff
 	$$success || exit 1
 
 .PHONY: format-codespell
-format-codespell:  ##- Fix spelling issues with codespell
+format-codespell: install-codespell  ##- Fix spelling issues with codespell
 	codespell --toml pyproject.toml --write-changes $(SOURCES)
 
 .PHONY: format-prettier
