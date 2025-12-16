@@ -26,6 +26,8 @@ jobs:
         uses: astral-sh/setup-uv@v7
       - name: Checkout the source
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: 🔄 Sync metadata files
         run: |
           make setup
