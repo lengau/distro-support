@@ -131,24 +131,24 @@
     "distribution": "debian",
     "version": "12",
     "begin_support": "2023-06-10",
-    "end_support": "2026-06-10",
+    "end_support": "2026-07-11",
     "begin_dev": "2021-08-14",
     "end_extended_support": "2033-06-30"
   },
   "13": {
     "distribution": "debian",
     "version": "13",
-    "begin_support": null,
-    "end_support": null,
+    "begin_support": "2025-08-09",
+    "end_support": "2028-08-09",
     "begin_dev": "2023-06-10",
-    "end_extended_support": null
+    "end_extended_support": "2035-06-30"
   },
   "14": {
     "distribution": "debian",
     "version": "14",
     "begin_support": null,
     "end_support": null,
-    "begin_dev": "2025-08-01",
+    "begin_dev": "2025-08-09",
     "end_extended_support": null
   },
   "15": {
