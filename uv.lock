@@ -19,11 +19,13 @@ wheels = [
 name = "distro-support"
 source = { editable = "." }
 dependencies = [
-    { name = "freezegun" },
+    { name = "typing-extensions", version = "4.13.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.9'" },
+    { name = "typing-extensions", version = "4.14.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.9'" },
 ]
 
 [package.dev-dependencies]
 dev = [
+    { name = "freezegun" },
     { name = "pytest", version = "8.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.9'" },
     { name = "pytest", version = "8.4.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.9'" },
 ]
@@ -33,10 +35,14 @@ types = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "freezegun", specifier = ">=1.5.5" }]
+requires-dist = [{ name = "typing-extensions", specifier = ">=4.13.2" }]
 
 [package.metadata.requires-dev]
-dev = [{ name = "pytest", specifier = ">=8.3.5" }]
+dev = [
+    { name = "freezegun", specifier = ">=1.5.5" },
+    { name = "pytest", specifier = ">=8.3.5" },
+]
+docs = []
 lint = []
 types = [{ name = "mypy", extras = ["reports"], specifier = ">=1.14.1" }]
 

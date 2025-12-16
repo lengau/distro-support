@@ -1,6 +1,6 @@
 import dataclasses
 import datetime
-from typing import Self
+from typing_extensions import Self
 
 from distro_support.errors import NoDevelopmentInfoError, NoESMInfoError
 

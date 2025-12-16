@@ -1,0 +1,55 @@
+name: Update metadata files
+
+on:
+  # Run hourly
+  schedule:
+    - cron: "0 * * * *"
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - ".github/workflows/update.yaml"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write # Let the default token commit and push.
+
+jobs:
+  sync:
+    name: 🔄 Sync metadata files
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install the latest version of uv
+        uses: astral-sh/setup-uv@v7
+      - name: Checkout the source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: 🔄 Sync metadata files
+        run: |
+          make setup
+          uv run ./tools/update.py
+      - name: Check for modified files
+        shell: bash
+        id: git-check
+        run: |
+          MODIFIED=$([ -z "$(git status --porcelain)" ] && echo "false" || echo "true")
+          echo "modified=$MODIFIED" >> "$GITHUB_OUTPUT"
+      - name: Commit changes
+        if: steps.git-check.outputs.modified == 'true'
+        shell: bash
+        run: |
+          make setup-lint
+          make format
+          git add **.json
+          uvx pre-commit run || true
+          git add **.json
+          git config --global user.name "Update bot"
+          git config --global user.email "update[bot]@github.com"
+          git commit -am "chore: update metadata files"
+          if git symbolic-ref -q HEAD; then
+            git push
+          fi
