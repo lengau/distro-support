@@ -40,6 +40,7 @@ jobs:
         if: steps.git-check.outputs.modified == 'true'
         shell: bash
         run: |
+          make setup-lint
           make format
           git add **.json
           uvx pre-commit run || true
