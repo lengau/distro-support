@@ -31,6 +31,12 @@ pack: pack-pip  ## Build all packages
 
 # Find dependencies that need installing
 APT_PACKAGES :=
+ifeq ($(wildcard /usr/include/libxml2/libxml/xpath.h),)
+APT_PACKAGES += libxml2-dev
+endif
+ifeq ($(wildcard /usr/include/libxslt/xslt.h),)
+APT_PACKAGES += libxslt1-dev
+endif
 
 # Used for installing build dependencies in CI.
 .PHONY: install-build-deps
