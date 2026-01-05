@@ -30,7 +30,7 @@ jobs:
           fetch-depth: 0
       - name: 🔄 Sync metadata files
         run: |
-          make setup
+          make -j setup UV_PYTHON=/usr/bin/python3
           uv run ./tools/update.py
       - name: Check for modified files
         shell: bash
@@ -42,7 +42,7 @@ jobs:
         if: steps.git-check.outputs.modified == 'true'
         shell: bash
         run: |
-          make setup-lint
+          make setup-lint UV_PYTHON=/usr/bin/python3
           make format
           git add **.json
           uvx pre-commit run || true
