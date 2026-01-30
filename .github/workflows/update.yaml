@@ -36,6 +36,7 @@ jobs:
         shell: bash
         id: git-check
         run: |
+          git status # Log the status
           MODIFIED=$([ -z "$(git status --porcelain)" ] && echo "false" || echo "true")
           echo "modified=$MODIFIED" >> "$GITHUB_OUTPUT"
       - name: Commit changes
