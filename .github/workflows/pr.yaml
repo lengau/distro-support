@@ -76,24 +76,5 @@ jobs:
                 ipv4.address: auto
                 ipv6.address: none
                 dns.nameservers: 8.8.8.8,8.8.4.4
-      - name: Launch container
-        run: lxc launch images:${{ matrix.distro }} testenv
-      - name: Install dependencies in container
-        run: |
-          lxc exec testenv -- sh -c "
-            if command -v apt-get > /dev/null 2>&1; then
-              apt-get update && apt-get install -y make curl
-            elif command -v dnf > /dev/null 2>&1; then
-              dnf install -y make curl
-            else
-              echo 'No supported package manager found' && exit 1
-            fi
-          "
-      - name: Install uv in container
-        run: lxc exec testenv -- sh -c "curl -LsSf https://astral.sh/uv/install.sh | sh"
-      - name: Push source into container
-        run: lxc file push --recursive . testenv/root/distro-support/
-      - name: Set up tests
-        run: lxc exec testenv --cwd /root/distro-support -- sh -c "PATH=/root/.local/bin:$PATH make setup-tests"
-      - name: Run tests
-        run: lxc exec testenv --cwd /root/distro-support -- sh -c "PATH=/root/.local/bin:$PATH make test"
+      - name: Run tests in container
+        run: make test-lxd LXD_DISTRO=${{ matrix.distro }}

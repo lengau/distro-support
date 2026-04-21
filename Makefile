@@ -70,3 +70,23 @@ endif
 .PHONY: update
 update: install-uv
 	uv run tools/update.py
+
+LXD_DISTRO ?= ubuntu/24.04
+LXD_CONTAINER = distro-support-$(subst /,-,$(LXD_DISTRO))
+
+.PHONY: test-lxd
+test-lxd:  ## Run tests in an ephemeral LXD container (set LXD_DISTRO=distro/version)
+	lxc launch --ephemeral images:$(LXD_DISTRO) $(LXD_CONTAINER)
+	trap 'lxc stop $(LXD_CONTAINER) 2>/dev/null || true' EXIT
+	lxc exec $(LXD_CONTAINER) -- sh -c '\
+		if command -v apt-get > /dev/null 2>&1; then \
+			apt-get update && apt-get install -y make curl; \
+		elif command -v dnf > /dev/null 2>&1; then \
+			dnf install -y make curl; \
+		else \
+			echo "No supported package manager found" >&2; exit 1; \
+		fi'
+	lxc file push --recursive . $(LXD_CONTAINER)/root/distro-support/
+	lxc exec $(LXD_CONTAINER) -- sh -c 'curl -LsSf https://astral.sh/uv/install.sh | env HOME=/root sh'
+	lxc exec $(LXD_CONTAINER) --cwd /root/distro-support -- sh -c 'PATH=/root/.local/bin:$$PATH make setup-tests'
+	lxc exec $(LXD_CONTAINER) --cwd /root/distro-support -- sh -c 'PATH=/root/.local/bin:$$PATH make test'
