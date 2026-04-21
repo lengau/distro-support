@@ -1,0 +1,74 @@
+{
+  "1": {
+    "distribution": "devuan",
+    "version": "1",
+    "begin_support": "2017-05-25",
+    "end_support": "2020-06-30",
+    "begin_dev": "2014-11-26",
+    "end_extended_support": null
+  },
+  "2": {
+    "distribution": "devuan",
+    "version": "2",
+    "begin_support": "2018-06-08",
+    "end_support": "2022-06-30",
+    "begin_dev": "2017-05-25",
+    "end_extended_support": null
+  },
+  "3": {
+    "distribution": "devuan",
+    "version": "3",
+    "begin_support": "2020-06-01",
+    "end_support": "2024-06-30",
+    "begin_dev": "2018-06-08",
+    "end_extended_support": null
+  },
+  "4": {
+    "distribution": "devuan",
+    "version": "4",
+    "begin_support": "2021-10-14",
+    "end_support": "2026-08-31",
+    "begin_dev": "2020-01-07",
+    "end_extended_support": null
+  },
+  "5": {
+    "distribution": "devuan",
+    "version": "5",
+    "begin_support": "2023-08-14",
+    "end_support": "2028-06-30",
+    "begin_dev": "2021-10-14",
+    "end_extended_support": null
+  },
+  "6": {
+    "distribution": "devuan",
+    "version": "6",
+    "begin_support": "2025-11-02",
+    "end_support": "2030-06-30",
+    "begin_dev": "2023-03-29",
+    "end_extended_support": null
+  },
+  "7": {
+    "distribution": "devuan",
+    "version": "7",
+    "begin_support": null,
+    "end_support": null,
+    "begin_dev": "2025-07-26",
+    "end_extended_support": null
+  },
+  "8": {
+    "distribution": "devuan",
+    "version": "8",
+    "begin_support": null,
+    "end_support": null,
+    "begin_dev": "2027-07-01",
+    "end_extended_support": null
+  },
+  "": {
+    "distribution": "devuan",
+    "version": "",
+    "begin_support": null,
+    "end_support": null,
+    "begin_dev": "2014-11-26",
+    "end_extended_support": null
+  }
+}
