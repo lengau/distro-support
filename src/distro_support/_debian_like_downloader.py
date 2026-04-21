@@ -5,7 +5,9 @@ import http.client
 from urllib import request
 
 
-def get_distro_info(url: str, *, name: str, esm_name: str) -> dict[str, dict[str, str]]:
+def get_distro_info(
+    url: str, *, name: str, esm_name: str | None = None
+) -> dict[str, dict[str, str]]:
     response: http.client.HTTPResponse = request.urlopen(url)
     if response.status != 200:
         raise ConnectionError(response.status)
@@ -19,6 +21,6 @@ def get_distro_info(url: str, *, name: str, esm_name: str) -> dict[str, dict[str
             "begin_support": row["release"],
             "end_support": row["eol"],
             "begin_dev": row["created"],
-            "end_extended_support": row[f"eol-{esm_name}"],
+            "end_extended_support": row.get(f"eol-{esm_name}") if esm_name else None,
         }
     return series
