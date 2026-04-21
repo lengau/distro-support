@@ -1,3 +1,4 @@
+from typing import Optional
 import dataclasses
 import datetime
 from typing_extensions import Self
@@ -11,10 +12,10 @@ class SupportRange:
 
     distribution: str
     version: str
-    begin_support: datetime.date | None
-    end_support: datetime.date | None
-    begin_dev: datetime.date | None = None
-    end_extended_support: datetime.date | None = None
+    begin_support: Optional[datetime.date]
+    end_support: Optional[datetime.date]
+    begin_dev: Optional[datetime.date] = None
+    end_extended_support: Optional[datetime.date] = None
 
     def is_supported_on(
         self, date: datetime.date, *, include_esm: bool = False
