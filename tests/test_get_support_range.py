@@ -16,12 +16,16 @@ from distro_support.errors import NoDevelopmentInfoError, NoESMInfoError
         ("ubuntu", "25.10", date(2025, 8, 12), False, True, None),
         ("debian", "1.1", date(2000, 1, 1), False, False, None),
         ("debian", "", date(3000, 1, 1), False, True, None),
+<<<<<<< HEAD
         ("devuan", "4", date(2022, 1, 1), True, False, None),
         ("devuan", "4", date(2030, 1, 1), False, False, None),
         ("devuan", "7", date(2026, 1, 1), False, True, None),
         # Alpine has no begin_dev, so in_dev=None signals NoDevelopmentInfoError
         ("alpine", "3.20", date(2025, 1, 1), True, None, None),
         ("alpine", "3.17", date(2025, 1, 1), False, None, None),
+        ("rhel", "9", date(2023, 1, 1), True, False, False),
+        ("rhel", "9", date(2033, 1, 1), False, False, True),
+        ("rhel", "7", date(2025, 1, 1), False, False, True),
     ],
 )
 def test_get_support_range(
