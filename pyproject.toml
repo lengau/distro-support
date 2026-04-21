@@ -6,7 +6,7 @@ readme = "README.md"
 authors = [
     { name = "Alex Lowe", email = "alex@lowe.dev" }
 ]
-requires-python = ">=3.8"
+requires-python = ">=3.10"
 dependencies = [
     "typing-extensions>=4.13.2",
 ]

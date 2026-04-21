@@ -35,7 +35,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12", "3.13", "3.14", "3.15"]
+        python-version: ["3.10", "3.11", "3.12", "3.13", "3.14", "3.15"]
     steps:
       - name: Check out code
         uses: actions/checkout@v6
@@ -45,6 +45,6 @@ jobs:
           enable-cache: true
           python-version: ${{ matrix.python-version }}
       - name: Set up test environment
-        run: make setup-tests UV_PYTHON=${{ matrix.python-version }}
+        run: make setup-tests
       - name: Test
         run: make test
