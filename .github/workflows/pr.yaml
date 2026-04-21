@@ -49,3 +49,44 @@ jobs:
         run: make setup-tests
       - name: Test
         run: make test
+
+  test-distros:
+    name: Test (${{ matrix.distro }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        distro:
+          - almalinux/9
+          - centos/9-Stream
+          - debian/forky
+          - debian/sid
+          - fedora/43
+        include:
+          - distro: almalinux/9
+            setup: dnf install -y make curl
+          - distro: centos/9-Stream
+            setup: dnf install -y make curl
+          - distro: debian/forky
+            setup: apt-get update && apt-get install -y make curl
+          - distro: debian/sid
+            setup: apt-get update && apt-get install -y make curl
+          - distro: fedora/43
+            setup: dnf install -y make curl
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v6
+      - name: Set up LXD
+        uses: canonical/setup-lxd@v0.1.1
+      - name: Launch container
+        run: lxc launch images:${{ matrix.distro }} testenv
+      - name: Install dependencies in container
+        run: lxc exec testenv -- ${{ matrix.setup }}
+      - name: Install uv in container
+        run: lxc exec testenv -- sh -c "curl -LsSf https://astral.sh/uv/install.sh | sh"
+      - name: Push source into container
+        run: lxc file push --recursive . testenv/root/distro-support/
+      - name: Set up tests
+        run: lxc exec testenv --cwd /root/distro-support -- sh -c "PATH=/root/.local/bin:$PATH make setup-tests"
+      - name: Run tests
+        run: lxc exec testenv --cwd /root/distro-support -- sh -c "PATH=/root/.local/bin:$PATH make test"
