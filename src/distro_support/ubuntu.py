@@ -3,7 +3,7 @@
 from . import _debian_like_downloader
 
 SUPPORT_INFO_URL = (
-    "https://git.launchpad.net/ubuntu/+source/distro-info-data/plain/ubuntu.csv"
+    "https://salsa.debian.org/debian/distro-info-data/-/raw/main/ubuntu.csv"
 )
 
 
