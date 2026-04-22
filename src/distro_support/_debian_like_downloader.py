@@ -7,7 +7,7 @@ from urllib import request
 
 def get_distro_info(
     url: str, *, name: str, esm_name: str | None = None
-) -> dict[str, dict[str, str]]:
+) -> dict[str, dict[str, str | None]]:
     response: http.client.HTTPResponse = request.urlopen(url)
     if response.status != 200:
         raise ConnectionError(response.status)

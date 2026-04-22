@@ -7,7 +7,7 @@ SUPPORT_INFO_URL = (
 )
 
 
-def get_distro_info() -> dict[str, dict[str, str]]:
+def get_distro_info() -> dict[str, dict[str, str | None]]:
     return _debian_like_downloader.get_distro_info(
         SUPPORT_INFO_URL, name="ubuntu", esm_name="esm"
     )
