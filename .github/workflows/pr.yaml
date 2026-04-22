@@ -51,33 +51,83 @@ jobs:
         run: make test
 
   test-distros:
-    name: Test (${{ matrix.distro }})
-    runs-on: ubuntu-latest
+    name: Test distros (${{ matrix.runner }})
+    runs-on: ${{ matrix.runner }}
     strategy:
       fail-fast: false
       matrix:
-        distro:
-          - alpine/3.21
-          - alpine/3.22
-          - alpine/3.23
-          - alpine/edge
-          - almalinux/9
-          - centos/9-Stream
-          - debian/forky
-          - debian/sid
-          - devuan/daedalus
-          - devuan/excalibur
-          - fedora/43
-          - kali
-          - mint/21.3
-          - mint/zena
-          - ubuntu:22.04
-          - ubuntu:24.04
-          - ubuntu-minimal-daily:26.04
+        runner:
+          - ubuntu-latest
+          - ubuntu-24.04-arm
     steps:
       - name: Check out code
         uses: actions/checkout@v6
       - name: Set up LXD
         uses: canonical/setup-lxd@v1
-      - name: Run tests in container
-        run: make test-lxd LXD_DISTRO=${{ matrix.distro }}
+      - name: Set up LXD project
+        run: |
+          lxc project show distro-support-tests > /dev/null 2>&1 || \
+            lxc project create distro-support-tests -c features.images=false -c features.profiles=false
+      - name: Run tests in containers
+        run: |
+          distros=(
+            alpine/3.21
+            alpine/3.22
+            alpine/3.23
+            alpine/edge
+            almalinux/9
+            centos/9-Stream
+            debian/forky
+            debian/sid
+            devuan/daedalus
+            devuan/excalibur
+            fedora/43
+            kali
+            ubuntu:22.04
+            ubuntu:24.04
+            ubuntu-minimal-daily:26.04
+          )
+          # Mint images are not available for arm64
+          if [[ "${{ matrix.runner }}" != *arm* ]]; then
+            distros+=(mint/21.3 mint/zena)
+          fi
+
+          # Launch all distros in parallel, capturing output to per-distro log files
+          declare -A pids logs
+          for distro in "${distros[@]}"; do
+            log=$(mktemp)
+            logs[$distro]=$log
+            make test-lxd LXD_DISTRO="$distro" >"$log" 2>&1 &
+            pids[$distro]=$!
+          done
+
+          # Collect results in order, replaying logs with collapsible groups
+          passed=()
+          failed=()
+          for distro in "${distros[@]}"; do
+            echo "::group::$distro"
+            cat "${logs[$distro]}"
+            if wait "${pids[$distro]}"; then
+              passed+=("$distro")
+            else
+              failed+=("$distro")
+              echo "::error::$distro failed"
+            fi
+            echo "::endgroup::"
+            rm "${logs[$distro]}"
+          done
+
+          {
+            echo "## Distro test results (${{ matrix.runner }})"
+            echo ""
+            echo "### ✅ Passed (${#passed[@]})"
+            for d in "${passed[@]}"; do echo "- $d"; done
+            echo ""
+            if [[ ${#failed[@]} -gt 0 ]]; then
+              echo "### ❌ Failed (${#failed[@]})"
+              for d in "${failed[@]}"; do echo "- $d"; done
+              echo ""
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          [[ ${#failed[@]} -eq 0 ]]
