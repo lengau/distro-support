@@ -93,7 +93,7 @@ test-lxd:  ## Run tests in an LXD container (set LXD_DISTRO=distro/version)
 		$(LXC) launch $(LXD_IMAGE) $(LXD_CONTAINER)
 	fi
 	$(LXC) exec $(LXD_CONTAINER) -- sh -c '\
-		until awk 'NR>1 && $2=="00000000" && $3!="00000000" {found=1; exit} END {exit !found}' /proc/net/route 2>/dev/null; do sleep 1; done; \
+		until ip route 2>/dev/null | grep -q "^default"; do sleep 1; done; \
 		if command -v apt-get > /dev/null 2>&1; then \
 			apt-get update && apt-get install -y make curl python3; \
 		elif command -v dnf > /dev/null 2>&1; then \
