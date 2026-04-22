@@ -21,22 +21,28 @@ def get_distro_info() -> dict[str, dict[str, str | None]]:
     req = request.Request(SUPPORT_INFO_URL, headers={"User-Agent": "distro-support"})
     with request.urlopen(req) as response:
         if response.status != 200:
-            raise ConnectionError(response.status)
-        data = json.loads(response.read())
+            raise RuntimeError(
+                f"Unexpected HTTP status from Red Hat API: {response.status}"
+            )
+        data = json.load(response)
+
+    if not data.get("data"):
+        return {}
 
     series = {}
-    for version in data["data"][0]["versions"]:
+    for version in data["data"][0].get("versions", []):
         ver = version["name"]
-        phases = {p["name"].lower(): p for p in version["phases"]}
+        phases = {p["name"].lower(): p for p in version.get("phases", [])}
+        ga_date = _parse_date(phases.get(_PHASE_GA, {}).get("end_date"))
 
         series[ver] = {
             "distribution": "rhel",
             "version": ver,
-            "begin_support": _parse_date(phases.get(_PHASE_GA, {}).get("end_date")),
+            "begin_support": ga_date,
             "end_support": _parse_date(
                 phases.get(_PHASE_MAINTENANCE, {}).get("end_date")
             ),
-            "begin_dev": _parse_date(phases.get(_PHASE_GA, {}).get("end_date")),
+            "begin_dev": ga_date,
             "end_extended_support": _parse_date(
                 phases.get(_PHASE_ELS, {}).get("end_date")
             ),

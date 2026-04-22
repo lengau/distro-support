@@ -7,8 +7,10 @@ from distro_support import alpine, debian, devuan, rhel, ubuntu
 
 
 def update(module):
-    ubuntu_data = pathlib.Path(module.__file__).with_suffix(".json")
-    ubuntu_data.write_text(json.dumps(module.get_distro_info(), indent="  ") + "\n")
+    data_path = pathlib.Path(module.__file__).with_suffix(".json")
+    data_path.write_text(
+        json.dumps(module.get_distro_info(), indent="  ", sort_keys=True) + "\n"
+    )
 
 
 if __name__ == "__main__":
