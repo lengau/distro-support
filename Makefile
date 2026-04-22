@@ -94,18 +94,20 @@ test-lxd:  ## Run tests in an LXD container (set LXD_DISTRO=distro/version)
 	fi
 	$(LXC) exec $(LXD_CONTAINER) -- sh -c '\
 		until ip route 2>/dev/null | grep -q "^default"; do sleep 1; done; \
+		until getent hosts cloudflare.com >/dev/null 2>&1 || nslookup cloudflare.com >/dev/null 2>&1; do sleep 1; done; \
+		retry() { n=0; until [ $$n -ge 3 ]; do "$$@" && return 0; n=$$((n+1)); sleep 5; done; return 1; }; \
 		if command -v apt-get > /dev/null 2>&1; then \
-			apt-get update && apt-get install -y make curl python3; \
+			retry apt-get update && apt-get install -y make curl python3; \
 		elif command -v dnf > /dev/null 2>&1; then \
-			dnf install -y make curl tar python3; \
+			retry dnf install -y make curl tar python3; \
 			python3 -c "import sys; sys.exit(0 if sys.version_info >= (3, 10) else 1)" 2>/dev/null || dnf install -y python3.11; \
 		elif command -v zypper > /dev/null 2>&1; then \
-			zypper --non-interactive install make curl python3; \
+			retry zypper --non-interactive install make curl python3; \
 			python3 -c "import sys; sys.exit(0 if sys.version_info >= (3, 10) else 1)" 2>/dev/null || zypper --non-interactive install python310; \
 		elif command -v pacman > /dev/null 2>&1; then \
-			pacman -Sy --noconfirm make curl python3; \
+			retry pacman -Sy --noconfirm make curl python3; \
 		elif command -v apk > /dev/null 2>&1; then \
-			apk add --no-cache make curl python3; \
+			retry apk add --no-cache make curl python3; \
 		else \
 			echo "No supported package manager found" >&2; exit 1; \
 		fi'
