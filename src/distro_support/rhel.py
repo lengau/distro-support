@@ -19,7 +19,7 @@ def _parse_date(value: str | None) -> str | None:
 
 def get_distro_info() -> dict[str, dict[str, str | None]]:
     req = request.Request(SUPPORT_INFO_URL, headers={"User-Agent": "distro-support"})
-    with request.urlopen(req) as response:
+    with request.urlopen(req) as response:  # nosec B310
         if response.status != 200:
             raise RuntimeError(
                 f"Unexpected HTTP status from Red Hat API: {response.status}"
