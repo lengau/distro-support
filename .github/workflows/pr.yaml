@@ -51,11 +51,14 @@ jobs:
         run: make test
 
   test-distros:
-    name: Test (${{ matrix.distro }})
-    runs-on: ubuntu-latest
+    name: Test (${{ matrix.distro }}, ${{ matrix.runner }})
+    runs-on: ${{ matrix.runner }}
     strategy:
       fail-fast: false
       matrix:
+        runner:
+          - ubuntu-latest
+          - ubuntu-24.04-arm
         distro:
           - alpine/3.21
           - alpine/3.22
