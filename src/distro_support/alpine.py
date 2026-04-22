@@ -8,11 +8,11 @@ RELEASES_URL = "https://alpinelinux.org/releases.json"
 
 
 def get_distro_info() -> dict[str, dict[str, str | None]]:
-    response: http.client.HTTPResponse = request.urlopen(RELEASES_URL)
+    response: http.client.HTTPResponse = request.urlopen(RELEASES_URL, timeout=10)
     if response.status != 200:
         raise ConnectionError(response.status)
 
-    data = json.loads(response.read().decode())
+    data = json.load(response)
     series: dict[str, dict[str, str | None]] = {}
 
     for branch in data.get("release_branches", []):
