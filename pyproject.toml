@@ -26,6 +26,9 @@ types = [
 ]
 docs = []
 
+[tool.bandit]
+exclude_dirs = ["tests"]
+
 [tool.hatch.version]
 source = "vcs"
 tag-pattern = "(?P<version>\\d{4}\\.\\d\\d\\.\\d\\d)"
