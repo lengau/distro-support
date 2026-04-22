@@ -21,6 +21,8 @@ def get_distro_info(
             "begin_support": row["release"],
             "end_support": row["eol"],
             "begin_dev": row["created"],
-            "end_extended_support": row.get(f"eol-{esm_name}") if esm_name else None,
+            "end_extended_support": (row.get(f"eol-{esm_name}") or None)
+            if esm_name
+            else None,
         }
     return series

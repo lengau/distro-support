@@ -54,20 +54,24 @@ class SupportRange:
         )
 
     @classmethod
-    def from_json(cls, data: dict[str, str]) -> Self:
+    def from_json(cls, data: dict[str, str | None]) -> Self:
+        begin_support = data.get("begin_support")
+        end_support = data.get("end_support")
+        begin_dev = data.get("begin_dev")
+        end_extended_support = data.get("end_extended_support")
         return cls(
-            distribution=data["distribution"],
-            version=data["version"],
+            distribution=data["distribution"] or "",
+            version=data["version"] or "",
             begin_support=None
-            if data.get("begin_support") is None
-            else datetime.date.fromisoformat(data["begin_support"]),
+            if begin_support is None
+            else datetime.date.fromisoformat(begin_support),
             end_support=None
-            if data.get("end_support") is None
-            else datetime.date.fromisoformat(data["end_support"]),
+            if end_support is None
+            else datetime.date.fromisoformat(end_support),
             begin_dev=None
-            if data.get("begin_dev") is None
-            else datetime.date.fromisoformat(data["begin_dev"]),
+            if begin_dev is None
+            else datetime.date.fromisoformat(begin_dev),
             end_extended_support=None
-            if data.get("end_extended_support") is None
-            else datetime.date.fromisoformat(data["end_extended_support"]),
+            if end_extended_support is None
+            else datetime.date.fromisoformat(end_extended_support),
         )
