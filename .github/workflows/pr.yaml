@@ -57,6 +57,7 @@ jobs:
       fail-fast: false
       matrix:
         distro:
+          - alpine/3.23
           - almalinux/9
           - centos/9-Stream
           - debian/forky
