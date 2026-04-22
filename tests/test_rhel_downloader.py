@@ -174,5 +174,5 @@ class TestGetDistroInfo:
         mock_response = _make_mock_response(_FAKE_API_RESPONSE)
         mock_response.status = 503
         with patch("distro_support.rhel.request.urlopen", return_value=mock_response):
-            with pytest.raises(ConnectionError):
+            with pytest.raises(RuntimeError):
                 get_distro_info()
