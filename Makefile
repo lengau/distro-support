@@ -64,7 +64,7 @@ else ifneq ($(shell which snap),)
 	sudo snap install --beta astral-ty
 	sudo snap alias astral-ty.ty ty
 else ifneq ($(shell which uv),)
-	uv tool install ty
+	uv tool install --prerelease=allow ty || true
 endif
 
 .PHONY: update
@@ -99,6 +99,11 @@ test-lxd:  ## Run tests in an LXD container (set LXD_DISTRO=distro/version)
 		elif command -v dnf > /dev/null 2>&1; then \
 			dnf install -y make curl tar python3; \
 			python3 -c "import sys; sys.exit(0 if sys.version_info >= (3, 10) else 1)" 2>/dev/null || dnf install -y python3.11; \
+		elif command -v zypper > /dev/null 2>&1; then \
+			zypper --non-interactive install make curl python3; \
+			python3 -c "import sys; sys.exit(0 if sys.version_info >= (3, 10) else 1)" 2>/dev/null || zypper --non-interactive install python310; \
+		elif command -v pacman > /dev/null 2>&1; then \
+			pacman -Sy --noconfirm make curl python3; \
 		elif command -v apk > /dev/null 2>&1; then \
 			apk add --no-cache make curl python3; \
 		else \

@@ -76,13 +76,18 @@ jobs:
             alpine/3.23
             alpine/edge
             almalinux/9
+            archlinux
             centos/9-Stream
+            debian/12
             debian/forky
             debian/sid
             devuan/daedalus
             devuan/excalibur
             fedora/43
             kali
+            opensuse/15.6
+            opensuse/tumbleweed
+            rockylinux/9
             ubuntu:22.04
             ubuntu:24.04
             ubuntu-minimal-daily:26.04
