@@ -58,7 +58,7 @@ class SupportRange:
 
 - All date fields are `Optional[datetime.date]` — a `None` means the date is unknown
 - `end_extended_support` represents ESM/LTS extended support (e.g. Ubuntu Pro)
-- `from_json(data: dict[str, Optional[str]])` is the standard constructor from JSON
+- `from_json(data: dict[str, str | None])` is the standard constructor from JSON
 
 ## JSON Data Files
 
@@ -116,7 +116,8 @@ Downloaders live in `_<family>_downloader.py` and follow this pattern:
 ## Type Annotations
 
 - All public functions and methods must be fully annotated
-- Use `Optional[X]` (not `X | None`) for consistency with the existing codebase
+- Use `X | None` (not `Optional[X]`) — `Optional` appears in older code from when the
+  project supported Python 3.8, but `X | None` is preferred going forward
 - Use `typing_extensions` for features not yet in the stdlib minimum (currently 3.10)
 - `ty` (astral-ty) is the primary type checker; it is stricter than mypy on narrowing —
   assign to a local variable before an `is None` check rather than checking
