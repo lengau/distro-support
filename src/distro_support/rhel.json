@@ -1,0 +1,42 @@
+{
+  "6": {
+    "distribution": "rhel",
+    "version": "6",
+    "begin_support": "2010-11-10",
+    "end_support": "2020-11-30",
+    "begin_dev": "2010-11-10",
+    "end_extended_support": "2024-06-30"
+  },
+  "7": {
+    "distribution": "rhel",
+    "version": "7",
+    "begin_support": "2014-06-10",
+    "end_support": "2024-06-30",
+    "begin_dev": "2014-06-10",
+    "end_extended_support": "2029-05-31"
+  },
+  "8": {
+    "distribution": "rhel",
+    "version": "8",
+    "begin_support": "2019-05-07",
+    "end_support": "2029-05-31",
+    "begin_dev": "2019-05-07",
+    "end_extended_support": "2032-05-31"
+  },
+  "9": {
+    "distribution": "rhel",
+    "version": "9",
+    "begin_support": "2022-05-18",
+    "end_support": "2032-05-31",
+    "begin_dev": "2022-05-18",
+    "end_extended_support": "2035-05-31"
+  },
+  "10": {
+    "distribution": "rhel",
+    "version": "10",
+    "begin_support": "2025-05-20",
+    "end_support": "2035-05-31",
+    "begin_dev": "2025-05-20",
+    "end_extended_support": "2038-05-31"
+  }
+}
