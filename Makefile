@@ -74,7 +74,7 @@ update: install-uv
 LXD_PROJECT ?= distro-support-tests
 LXD_DISTRO ?= debian/bookworm
 LXD_IMAGE = $(if $(findstring :,$(LXD_DISTRO)),$(LXD_DISTRO),images:$(LXD_DISTRO))
-LXD_CONTAINER = distro-support-$(subst :,-,$(subst /,-,$(subst .,-,$(patsubst images:%,%,$(LXD_DISTRO)))))
+LXD_CONTAINER = $(subst :,-,$(subst /,-,$(subst .,-,$(patsubst images:%,%,$(LXD_DISTRO)))))
 LXC = lxc --project $(LXD_PROJECT)
 
 .PHONY: clean-lxd
@@ -95,13 +95,15 @@ test-lxd:  ## Run tests in an LXD container (set LXD_DISTRO=distro/version)
 	$(LXC) exec $(LXD_CONTAINER) -- sh -c '\
 		until grep -q ^nameserver /etc/resolv.conf 2>/dev/null; do sleep 1; done; \
 		if command -v apt-get > /dev/null 2>&1; then \
-			apt-get update && apt-get install -y make curl; \
+			apt-get update && apt-get install -y make curl python3; \
 		elif command -v dnf > /dev/null 2>&1; then \
-			dnf install -y make curl tar; \
+			dnf install -y make curl tar python3; \
+			python3 -c "import sys; sys.exit(0 if sys.version_info >= (3, 10) else 1)" 2>/dev/null || dnf install -y python3.11; \
 		else \
 			echo "No supported package manager found" >&2; exit 1; \
 		fi'
 	$(LXC) exec $(LXD_CONTAINER) -- sh -c 'curl -LsSf https://astral.sh/uv/install.sh | env HOME=/root sh'
 	$(LXC) file push --recursive $(PWD) $(LXD_CONTAINER)/root/
-	$(LXC) exec $(LXD_CONTAINER) --env DEBIAN_FRONTEND=noninteractive --cwd /root/distro-support -- sh -c 'PATH=/root/.local/bin:$$PATH make CI=1 SETUPTOOLS_SCM_PRETEND_VERSION=0.0 setup-tests'
-	$(LXC) exec $(LXD_CONTAINER) --env DEBIAN_FRONTEND=noninteractive --cwd /root/distro-support -- sh -c 'PATH=/root/.local/bin:$$PATH make CI=1 test'
+	$(LXC) exec $(LXD_CONTAINER) --cwd /root/distro-support -- sh -c 'rm -f .python-version'
+	$(LXC) exec $(LXD_CONTAINER) --env DEBIAN_FRONTEND=noninteractive --env UV_PYTHON_DOWNLOADS=never --cwd /root/distro-support -- sh -c 'PATH=/root/.local/bin:$$PATH make CI=1 SETUPTOOLS_SCM_PRETEND_VERSION=0.0 setup-tests'
+	$(LXC) exec $(LXD_CONTAINER) --env DEBIAN_FRONTEND=noninteractive --env UV_PYTHON_DOWNLOADS=never --cwd /root/distro-support -- sh -c 'PATH=/root/.local/bin:$$PATH make CI=1 test'
