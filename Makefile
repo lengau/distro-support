@@ -71,22 +71,29 @@ endif
 update: install-uv
 	uv run tools/update.py
 
-LXD_DISTRO ?= ubuntu/24.04
-LXD_CONTAINER = distro-support-$(subst /,-,$(LXD_DISTRO))
+LXD_PROJECT ?= distro-support-tests
+LXD_DISTRO ?= debian/bookworm
+LXD_CONTAINER = distro-support-$(subst /,-,$(subst .,-,$(LXD_DISTRO)))
+LXC = lxc --project $(LXD_PROJECT)
 
 .PHONY: test-lxd
-test-lxd:  ## Run tests in an ephemeral LXD container (set LXD_DISTRO=distro/version)
-	lxc launch --ephemeral images:$(LXD_DISTRO) $(LXD_CONTAINER)
-	trap 'lxc stop $(LXD_CONTAINER) 2>/dev/null || true' EXIT
-	lxc exec $(LXD_CONTAINER) -- sh -c '\
-		if command -v apt-get > /dev/null 2>&1; then \
-			apt-get update && apt-get install -y make curl; \
-		elif command -v dnf > /dev/null 2>&1; then \
-			dnf install -y make curl; \
-		else \
-			echo "No supported package manager found" >&2; exit 1; \
-		fi'
-	lxc file push --recursive . $(LXD_CONTAINER)/root/distro-support/
-	lxc exec $(LXD_CONTAINER) -- sh -c 'curl -LsSf https://astral.sh/uv/install.sh | env HOME=/root sh'
-	lxc exec $(LXD_CONTAINER) --cwd /root/distro-support -- sh -c 'PATH=/root/.local/bin:$$PATH make setup-tests'
-	lxc exec $(LXD_CONTAINER) --cwd /root/distro-support -- sh -c 'PATH=/root/.local/bin:$$PATH make test'
+test-lxd:  ## Run tests in an LXD container (set LXD_DISTRO=distro/version)
+	lxc project show $(LXD_PROJECT) > /dev/null 2>&1 || lxc project create $(LXD_PROJECT) -c features.images=false -c features.profiles=false
+	trap '$(LXC) stop $(LXD_CONTAINER) 2>/dev/null || true' EXIT
+	if $(LXC) info $(LXD_CONTAINER) > /dev/null 2>&1; then
+		$(LXC) start $(LXD_CONTAINER) 2>/dev/null || true
+	else
+		$(LXC) launch images:$(LXD_DISTRO) $(LXD_CONTAINER)
+		$(LXC) exec $(LXD_CONTAINER) -- sh -c '\
+			if command -v apt-get > /dev/null 2>&1; then \
+				apt-get update && apt-get install -y make curl; \
+			elif command -v dnf > /dev/null 2>&1; then \
+				dnf install -y make curl; \
+			else \
+				echo "No supported package manager found" >&2; exit 1; \
+			fi'
+		$(LXC) exec $(LXD_CONTAINER) -- sh -c 'curl -LsSf https://astral.sh/uv/install.sh | env HOME=/root sh'
+	fi
+	$(LXC) file push --recursive $(PWD) $(LXD_CONTAINER)/root/
+	$(LXC) exec $(LXD_CONTAINER) --env DEBIAN_FRONTEND=noninteractive --cwd /root/distro-support -- sh -c 'PATH=/root/.local/bin:$$PATH make CI=1 SETUPTOOLS_SCM_PRETEND_VERSION=0.0 setup-tests'
+	$(LXC) exec $(LXD_CONTAINER) --env DEBIAN_FRONTEND=noninteractive --cwd /root/distro-support -- sh -c 'PATH=/root/.local/bin:$$PATH make CI=1 test'
