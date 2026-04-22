@@ -61,7 +61,13 @@ jobs:
           - centos/9-Stream
           - debian/forky
           - debian/sid
+          - devuan/chimaera
+          - devuan/daedalus
+          - devuan/excalibur
           - fedora/43
+          - kali
+          - mint/21.3
+          - mint/zena
     steps:
       - name: Check out code
         uses: actions/checkout@v6
