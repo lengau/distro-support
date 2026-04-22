@@ -49,3 +49,31 @@ jobs:
         run: make setup-tests
       - name: Test
         run: make test
+
+  test-distros:
+    name: Test (${{ matrix.distro }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        distro:
+          - almalinux/9
+          - centos/9-Stream
+          - debian/forky
+          - debian/sid
+          - devuan/daedalus
+          - devuan/excalibur
+          - fedora/43
+          - kali
+          - mint/21.3
+          - mint/zena
+          - ubuntu:22.04
+          - ubuntu:24.04
+          - ubuntu-minimal-daily:26.04
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v6
+      - name: Set up LXD
+        uses: canonical/setup-lxd@v1
+      - name: Run tests in container
+        run: make test-lxd LXD_DISTRO=${{ matrix.distro }}
