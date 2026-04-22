@@ -84,6 +84,7 @@ test-lxd:  ## Run tests in an LXD container (set LXD_DISTRO=distro/version)
 		$(LXC) start $(LXD_CONTAINER) 2>/dev/null || true
 	else
 		$(LXC) launch images:$(LXD_DISTRO) $(LXD_CONTAINER)
+		$(LXC) exec $(LXD_CONTAINER) -- sh -c 'until test -d /etc; do sleep 1; done; rm -f /etc/resolv.conf && printf "nameserver 8.8.8.8\n" > /etc/resolv.conf'
 		$(LXC) exec $(LXD_CONTAINER) -- sh -c '\
 			if command -v apt-get > /dev/null 2>&1; then \
 				apt-get update && apt-get install -y make curl; \
