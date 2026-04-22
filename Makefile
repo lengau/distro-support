@@ -73,7 +73,8 @@ update: install-uv
 
 LXD_PROJECT ?= distro-support-tests
 LXD_DISTRO ?= debian/bookworm
-LXD_CONTAINER = distro-support-$(subst /,-,$(subst .,-,$(LXD_DISTRO)))
+LXD_IMAGE = $(if $(findstring :,$(LXD_DISTRO)),$(LXD_DISTRO),images:$(LXD_DISTRO))
+LXD_CONTAINER = distro-support-$(subst :,-,$(subst /,-,$(subst .,-,$(patsubst images:%,%,$(LXD_DISTRO)))))
 LXC = lxc --project $(LXD_PROJECT)
 
 .PHONY: clean-lxd
@@ -89,7 +90,7 @@ test-lxd:  ## Run tests in an LXD container (set LXD_DISTRO=distro/version)
 	if $(LXC) info $(LXD_CONTAINER) > /dev/null 2>&1; then
 		$(LXC) start $(LXD_CONTAINER) 2>/dev/null || true
 	else
-		$(LXC) launch images:$(LXD_DISTRO) $(LXD_CONTAINER)
+		$(LXC) launch $(LXD_IMAGE) $(LXD_CONTAINER)
 	fi
 	$(LXC) exec $(LXD_CONTAINER) -- sh -c '\
 		until grep -q ^nameserver /etc/resolv.conf 2>/dev/null; do sleep 1; done; \
