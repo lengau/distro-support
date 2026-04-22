@@ -3,7 +3,7 @@
 import json
 import pathlib
 
-from distro_support import debian, devuan, ubuntu
+from distro_support import alpine, debian, devuan, ubuntu
 
 
 def update(module):
@@ -18,3 +18,5 @@ if __name__ == "__main__":
     update(debian)
     print("Updating Devuan data")
     update(devuan)
+    print("Updating Alpine data")
+    update(alpine)

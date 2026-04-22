@@ -1,0 +1,250 @@
+{
+  "3.23": {
+    "distribution": "alpine",
+    "version": "3.23",
+    "begin_support": "2025-12-03",
+    "end_support": "2027-11-01",
+    "begin_dev": null,
+    "end_extended_support": null
+  },
+  "3.22": {
+    "distribution": "alpine",
+    "version": "3.22",
+    "begin_support": "2025-05-30",
+    "end_support": "2027-05-01",
+    "begin_dev": null,
+    "end_extended_support": null
+  },
+  "3.21": {
+    "distribution": "alpine",
+    "version": "3.21",
+    "begin_support": "2024-12-05",
+    "end_support": "2026-11-01",
+    "begin_dev": null,
+    "end_extended_support": null
+  },
+  "3.20": {
+    "distribution": "alpine",
+    "version": "3.20",
+    "begin_support": "2024-05-22",
+    "end_support": "2026-04-01",
+    "begin_dev": null,
+    "end_extended_support": null
+  },
+  "3.19": {
+    "distribution": "alpine",
+    "version": "3.19",
+    "begin_support": "2023-12-07",
+    "end_support": "2025-11-01",
+    "begin_dev": null,
+    "end_extended_support": null
+  },
+  "3.18": {
+    "distribution": "alpine",
+    "version": "3.18",
+    "begin_support": "2023-05-09",
+    "end_support": "2025-05-09",
+    "begin_dev": null,
+    "end_extended_support": null
+  },
+  "3.17": {
+    "distribution": "alpine",
+    "version": "3.17",
+    "begin_support": "2022-11-22",
+    "end_support": "2024-11-22",
+    "begin_dev": null,
+    "end_extended_support": null
+  },
+  "3.16": {
+    "distribution": "alpine",
+    "version": "3.16",
+    "begin_support": "2022-05-23",
+    "end_support": "2024-05-23",
+    "begin_dev": null,
+    "end_extended_support": null
+  },
+  "3.15": {
+    "distribution": "alpine",
+    "version": "3.15",
+    "begin_support": "2021-11-24",
+    "end_support": "2023-11-01",
+    "begin_dev": null,
+    "end_extended_support": null
+  },
+  "3.14": {
+    "distribution": "alpine",
+    "version": "3.14",
+    "begin_support": "2021-06-15",
+    "end_support": "2023-05-01",
+    "begin_dev": null,
+    "end_extended_support": null
+  },
+  "3.13": {
+    "distribution": "alpine",
+    "version": "3.13",
+    "begin_support": "2021-01-14",
+    "end_support": "2022-11-01",
+    "begin_dev": null,
+    "end_extended_support": null
+  },
+  "3.12": {
+    "distribution": "alpine",
+    "version": "3.12",
+    "begin_support": "2020-05-29",
+    "end_support": "2022-05-01",
+    "begin_dev": null,
+    "end_extended_support": null
+  },
+  "3.11": {
+    "distribution": "alpine",
+    "version": "3.11",
+    "begin_support": "2019-12-29",
+    "end_support": "2021-11-01",
+    "begin_dev": null,
+    "end_extended_support": null
+  },
+  "3.10": {
+    "distribution": "alpine",
+    "version": "3.10",
+    "begin_support": "2019-06-19",
+    "end_support": "2021-05-01",
+    "begin_dev": null,
+    "end_extended_support": null
+  },
+  "3.9": {
+    "distribution": "alpine",
+    "version": "3.9",
+    "begin_support": "2019-01-29",
+    "end_support": "2020-11-01",
+    "begin_dev": null,
+    "end_extended_support": null
+  },
+  "3.8": {
+    "distribution": "alpine",
+    "version": "3.8",
+    "begin_support": "2018-06-26",
+    "end_support": "2020-05-01",
+    "begin_dev": null,
+    "end_extended_support": null
+  },
+  "3.7": {
+    "distribution": "alpine",
+    "version": "3.7",
+    "begin_support": "2017-11-30",
+    "end_support": "2019-11-01",
+    "begin_dev": null,
+    "end_extended_support": null
+  },
+  "3.6": {
+    "distribution": "alpine",
+    "version": "3.6",
+    "begin_support": "2017-05-24",
+    "end_support": "2019-05-01",
+    "begin_dev": null,
+    "end_extended_support": null
+  },
+  "3.5": {
+    "distribution": "alpine",
+    "version": "3.5",
+    "begin_support": "2016-12-22",
+    "end_support": "2018-11-01",
+    "begin_dev": null,
+    "end_extended_support": null
+  },
+  "3.4": {
+    "distribution": "alpine",
+    "version": "3.4",
+    "begin_support": "2016-05-31",
+    "end_support": "2018-05-01",
+    "begin_dev": null,
+    "end_extended_support": null
+  },
+  "3.3": {
+    "distribution": "alpine",
+    "version": "3.3",
+    "begin_support": "2015-12-18",
+    "end_support": "2017-11-01",
+    "begin_dev": null,
+    "end_extended_support": null
+  },
+  "3.2": {
+    "distribution": "alpine",
+    "version": "3.2",
+    "begin_support": "2015-05-26",
+    "end_support": "2017-05-01",
+    "begin_dev": null,
+    "end_extended_support": null
+  },
+  "3.1": {
+    "distribution": "alpine",
+    "version": "3.1",
+    "begin_support": "2014-12-10",
+    "end_support": "2016-11-01",
+    "begin_dev": null,
+    "end_extended_support": null
+  },
+  "3.0": {
+    "distribution": "alpine",
+    "version": "3.0",
+    "begin_support": "2014-06-04",
+    "end_support": "2016-05-01",
+    "begin_dev": null,
+    "end_extended_support": null
+  },
+  "2.7": {
+    "distribution": "alpine",
+    "version": "2.7",
+    "begin_support": "2013-11-08",
+    "end_support": "2015-11-01",
+    "begin_dev": null,
+    "end_extended_support": null
+  },
+  "2.6": {
+    "distribution": "alpine",
+    "version": "2.6",
+    "begin_support": "2013-05-17",
+    "end_support": "2015-05-01",
+    "begin_dev": null,
+    "end_extended_support": null
+  },
+  "2.5": {
+    "distribution": "alpine",
+    "version": "2.5",
+    "begin_support": "2012-11-07",
+    "end_support": "2014-11-01",
+    "begin_dev": null,
+    "end_extended_support": null
+  },
+  "2.4": {
+    "distribution": "alpine",
+    "version": "2.4",
+    "begin_support": "2012-05-02",
+    "end_support": "2014-05-01",
+    "begin_dev": null,
+    "end_extended_support": null
+  },
+  "2.3": {
+    "distribution": "alpine",
+    "version": "2.3",
+    "begin_support": "2011-11-01",
+    "end_support": "2013-11-01",
+    "begin_dev": null,
+    "end_extended_support": null
+  },
+  "2.2": {
+    "distribution": "alpine",
+    "version": "2.2",
+    "begin_support": "2011-05-06",
+    "end_support": "2013-05-01",
+    "begin_dev": null,
+    "end_extended_support": null
+  },
+  "2.1": {
+    "distribution": "alpine",
+    "version": "2.1",
+    "begin_support": "2010-11-01",
+    "end_support": "2012-11-01",
+    "begin_dev": null,
+    "end_extended_support": null
+  }
+}
