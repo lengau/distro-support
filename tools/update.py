@@ -2,13 +2,14 @@
 
 import json
 import pathlib
+import sys
 
 from distro_support import alpine, debian, devuan, rhel, ubuntu
 
 
 def _version_sort_key(version: str) -> tuple[int, ...]:
     if not version:
-        return (float("inf"),)  # type: ignore[return-value]
+        return (sys.maxsize,)
     try:
         return tuple(int(x) for x in version.split("."))
     except ValueError:
