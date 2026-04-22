@@ -77,6 +77,11 @@ jobs:
           - ubuntu:22.04
           - ubuntu:24.04
           - ubuntu-minimal-daily:26.04
+        exclude:
+          - runner: ubuntu-24.04-arm
+            distro: mint/21.3
+          - runner: ubuntu-24.04-arm
+            distro: mint/zena
     steps:
       - name: Check out code
         uses: actions/checkout@v6
