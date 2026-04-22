@@ -93,24 +93,31 @@ test-lxd:  ## Run tests in an LXD container (set LXD_DISTRO=distro/version)
 		$(LXC) launch $(LXD_IMAGE) $(LXD_CONTAINER)
 	fi
 	$(LXC) exec $(LXD_CONTAINER) -- sh -c '\
-		until grep -q ^nameserver /etc/resolv.conf 2>/dev/null; do sleep 1; done; \
+		until ip route 2>/dev/null | grep -q "^default"; do sleep 1; done; \
+		until getent hosts cloudflare.com >/dev/null 2>&1 || nslookup cloudflare.com >/dev/null 2>&1; do sleep 1; done; \
+		retry() { n=0; until [ $$n -ge 3 ]; do "$$@" && return 0; n=$$((n+1)); sleep 5; done; return 1; }; \
 		if command -v apt-get > /dev/null 2>&1; then \
-			apt-get update && apt-get install -y make curl python3; \
+			retry apt-get update && apt-get install -y make curl python3; \
 		elif command -v dnf > /dev/null 2>&1; then \
-			dnf install -y make curl tar python3; \
+			retry dnf install -y make curl tar python3; \
 			python3 -c "import sys; sys.exit(0 if sys.version_info >= (3, 10) else 1)" 2>/dev/null || dnf install -y python3.11; \
 		elif command -v zypper > /dev/null 2>&1; then \
-			zypper --non-interactive install make curl python3; \
+			retry zypper --non-interactive install make curl python3; \
 			python3 -c "import sys; sys.exit(0 if sys.version_info >= (3, 10) else 1)" 2>/dev/null || zypper --non-interactive install python310; \
 		elif command -v pacman > /dev/null 2>&1; then \
-			pacman -Sy --noconfirm make curl python3; \
+			retry pacman -Sy --noconfirm make curl python3; \
 		elif command -v apk > /dev/null 2>&1; then \
-			apk add --no-cache make curl python3; \
+			retry apk add --no-cache make curl python3; \
 		else \
 			echo "No supported package manager found" >&2; exit 1; \
 		fi'
 	$(LXC) exec $(LXD_CONTAINER) -- sh -c 'curl -LsSf https://astral.sh/uv/install.sh | env HOME=/root sh'
-	$(LXC) file push --recursive $(PWD) $(LXD_CONTAINER)/root/
-	$(LXC) exec $(LXD_CONTAINER) --cwd /root/distro-support -- sh -c 'rm -f .python-version'
+	tar -C $(dir $(PWD)) \
+		--exclude='$(notdir $(PWD))/.venv' \
+		--exclude='$(notdir $(PWD))/.git' \
+		--exclude='*/__pycache__' \
+		-c $(notdir $(PWD)) \
+		| $(LXC) exec $(LXD_CONTAINER) -- tar -C /root -x
+	$(LXC) exec $(LXD_CONTAINER) --cwd /root/distro-support -- sh -c 'rm -f .python-version && rm -rf .venv'
 	$(LXC) exec $(LXD_CONTAINER) --env DEBIAN_FRONTEND=noninteractive --env UV_PYTHON_DOWNLOADS=never --cwd /root/distro-support -- sh -c 'PATH=/root/.local/bin:$$PATH make CI=1 SETUPTOOLS_SCM_PRETEND_VERSION=0.0 setup-tests'
 	$(LXC) exec $(LXD_CONTAINER) --env DEBIAN_FRONTEND=noninteractive --env UV_PYTHON_DOWNLOADS=never --cwd /root/distro-support -- sh -c 'PATH=/root/.local/bin:$$PATH make CI=1 test'
