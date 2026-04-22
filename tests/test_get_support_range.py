@@ -16,6 +16,9 @@ from distro_support.errors import NoESMInfoError
         ("ubuntu", "25.10", date(2025, 8, 12), False, True, None),
         ("debian", "1.1", date(2000, 1, 1), False, False, None),
         ("debian", "", date(3000, 1, 1), False, True, None),
+        ("devuan", "4", date(2022, 1, 1), True, False, None),
+        ("devuan", "4", date(2030, 1, 1), False, False, None),
+        ("devuan", "7", date(2026, 1, 1), False, True, None),
     ],
 )
 def test_get_support_range(

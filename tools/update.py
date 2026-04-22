@@ -3,12 +3,12 @@
 import json
 import pathlib
 
-from distro_support import debian, ubuntu
+from distro_support import debian, devuan, ubuntu
 
 
 def update(module):
     ubuntu_data = pathlib.Path(module.__file__).with_suffix(".json")
-    ubuntu_data.write_text(json.dumps(module.get_distro_info(), indent="  "))
+    ubuntu_data.write_text(json.dumps(module.get_distro_info(), indent="  ") + "\n")
 
 
 if __name__ == "__main__":
@@ -16,3 +16,5 @@ if __name__ == "__main__":
     update(ubuntu)
     print("Updating Debian data")
     update(debian)
+    print("Updating Devuan data")
+    update(devuan)
