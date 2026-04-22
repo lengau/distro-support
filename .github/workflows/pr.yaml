@@ -51,7 +51,7 @@ jobs:
         run: make test
 
   test-distros:
-    name: Test (${{ matrix.distro }}, ${{ matrix.runner }})
+    name: LXD Test (${{ matrix.distro }}, ${{ matrix.runner }})
     runs-on: ${{ matrix.runner }}
     strategy:
       fail-fast: false
