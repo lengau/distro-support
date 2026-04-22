@@ -76,7 +76,13 @@ LXD_DISTRO ?= debian/bookworm
 LXD_CONTAINER = distro-support-$(subst /,-,$(subst .,-,$(LXD_DISTRO)))
 LXC = lxc --project $(LXD_PROJECT)
 
-.PHONY: test-lxd
+.PHONY: clean-lxd
+clean-lxd:  ## Delete all LXD test containers and the project
+	lxc project show $(LXD_PROJECT) > /dev/null 2>&1 || exit 0
+	$(LXC) list --format csv -c n | xargs -r -I{} $(LXC) delete --force {}
+	lxc project delete $(LXD_PROJECT)
+
+
 test-lxd:  ## Run tests in an LXD container (set LXD_DISTRO=distro/version)
 	lxc project show $(LXD_PROJECT) > /dev/null 2>&1 || lxc project create $(LXD_PROJECT) -c features.images=false -c features.profiles=false
 	trap '$(LXC) stop $(LXD_CONTAINER) 2>/dev/null || true' EXIT
@@ -84,17 +90,17 @@ test-lxd:  ## Run tests in an LXD container (set LXD_DISTRO=distro/version)
 		$(LXC) start $(LXD_CONTAINER) 2>/dev/null || true
 	else
 		$(LXC) launch images:$(LXD_DISTRO) $(LXD_CONTAINER)
-		$(LXC) exec $(LXD_CONTAINER) -- sh -c 'until test -d /etc; do sleep 1; done; rm -f /etc/resolv.conf && printf "nameserver 8.8.8.8\n" > /etc/resolv.conf'
-		$(LXC) exec $(LXD_CONTAINER) -- sh -c '\
-			if command -v apt-get > /dev/null 2>&1; then \
-				apt-get update && apt-get install -y make curl; \
-			elif command -v dnf > /dev/null 2>&1; then \
-				dnf install -y make curl; \
-			else \
-				echo "No supported package manager found" >&2; exit 1; \
-			fi'
-		$(LXC) exec $(LXD_CONTAINER) -- sh -c 'curl -LsSf https://astral.sh/uv/install.sh | env HOME=/root sh'
 	fi
+	$(LXC) exec $(LXD_CONTAINER) -- sh -c '\
+		until grep -q ^nameserver /etc/resolv.conf 2>/dev/null; do sleep 1; done; \
+		if command -v apt-get > /dev/null 2>&1; then \
+			apt-get update && apt-get install -y make curl; \
+		elif command -v dnf > /dev/null 2>&1; then \
+			dnf install -y make curl tar; \
+		else \
+			echo "No supported package manager found" >&2; exit 1; \
+		fi'
+	$(LXC) exec $(LXD_CONTAINER) -- sh -c 'curl -LsSf https://astral.sh/uv/install.sh | env HOME=/root sh'
 	$(LXC) file push --recursive $(PWD) $(LXD_CONTAINER)/root/
 	$(LXC) exec $(LXD_CONTAINER) --env DEBIAN_FRONTEND=noninteractive --cwd /root/distro-support -- sh -c 'PATH=/root/.local/bin:$$PATH make CI=1 SETUPTOOLS_SCM_PRETEND_VERSION=0.0 setup-tests'
 	$(LXC) exec $(LXD_CONTAINER) --env DEBIAN_FRONTEND=noninteractive --cwd /root/distro-support -- sh -c 'PATH=/root/.local/bin:$$PATH make CI=1 test'
