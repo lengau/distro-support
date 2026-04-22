@@ -87,6 +87,29 @@ jobs:
           if [[ "${{ matrix.runner }}" != *arm* ]]; then
             distros+=(mint/21.3 mint/zena)
           fi
+          passed=()
+          failed=()
           for distro in "${distros[@]}"; do
-            make test-lxd LXD_DISTRO="$distro"
+            echo "::group::$distro"
+            if make test-lxd LXD_DISTRO="$distro"; then
+              passed+=("$distro")
+            else
+              failed+=("$distro")
+            fi
+            echo "::endgroup::"
           done
+
+          {
+            echo "## Distro test results (${{ matrix.runner }})"
+            echo ""
+            echo "### ✅ Passed (${#passed[@]})"
+            for d in "${passed[@]}"; do echo "- $d"; done
+            echo ""
+            if [[ ${#failed[@]} -gt 0 ]]; then
+              echo "### ❌ Failed (${#failed[@]})"
+              for d in "${failed[@]}"; do echo "- $d"; done
+              echo ""
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          [[ ${#failed[@]} -eq 0 ]]
