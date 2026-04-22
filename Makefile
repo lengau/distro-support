@@ -110,7 +110,12 @@ test-lxd:  ## Run tests in an LXD container (set LXD_DISTRO=distro/version)
 			echo "No supported package manager found" >&2; exit 1; \
 		fi'
 	$(LXC) exec $(LXD_CONTAINER) -- sh -c 'curl -LsSf https://astral.sh/uv/install.sh | env HOME=/root sh'
-	$(LXC) file push --recursive $(PWD) $(LXD_CONTAINER)/root/
-	$(LXC) exec $(LXD_CONTAINER) --cwd /root/distro-support -- sh -c 'rm -f .python-version'
+	tar -C $(dir $(PWD)) \
+		--exclude='$(notdir $(PWD))/.venv' \
+		--exclude='$(notdir $(PWD))/.git' \
+		--exclude='*/__pycache__' \
+		-c $(notdir $(PWD)) \
+		| $(LXC) exec $(LXD_CONTAINER) -- tar -C /root -x
+	$(LXC) exec $(LXD_CONTAINER) --cwd /root/distro-support -- sh -c 'rm -f .python-version && rm -rf .venv'
 	$(LXC) exec $(LXD_CONTAINER) --env DEBIAN_FRONTEND=noninteractive --env UV_PYTHON_DOWNLOADS=never --cwd /root/distro-support -- sh -c 'PATH=/root/.local/bin:$$PATH make CI=1 SETUPTOOLS_SCM_PRETEND_VERSION=0.0 setup-tests'
 	$(LXC) exec $(LXD_CONTAINER) --env DEBIAN_FRONTEND=noninteractive --env UV_PYTHON_DOWNLOADS=never --cwd /root/distro-support -- sh -c 'PATH=/root/.local/bin:$$PATH make CI=1 test'
