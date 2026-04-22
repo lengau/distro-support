@@ -99,6 +99,8 @@ test-lxd:  ## Run tests in an LXD container (set LXD_DISTRO=distro/version)
 		elif command -v dnf > /dev/null 2>&1; then \
 			dnf install -y make curl tar python3; \
 			python3 -c "import sys; sys.exit(0 if sys.version_info >= (3, 10) else 1)" 2>/dev/null || dnf install -y python3.11; \
+		elif command -v apk > /dev/null 2>&1; then \
+			apk add --no-cache make curl python3; \
 		else \
 			echo "No supported package manager found" >&2; exit 1; \
 		fi'
