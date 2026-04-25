@@ -350,5 +350,13 @@
     "end_support": "2031-05-29",
     "begin_dev": "2025-10-09",
     "end_extended_support": "2036-04-23"
+  },
+  "26.10": {
+    "distribution": "ubuntu",
+    "version": "26.10",
+    "begin_support": "2026-10-15",
+    "end_support": "2027-07-15",
+    "begin_dev": "2026-04-24",
+    "end_extended_support": null
   }
 }
