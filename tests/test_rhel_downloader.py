@@ -140,11 +140,11 @@ class TestGetDistroInfo:
         for key, ver in result.items():
             assert ver["version"] == key
 
-    def test_begin_dev_equals_begin_support(self, mock_urlopen):
-        """begin_dev is set to the GA date so is_in_development_on always returns False."""
+    def test_begin_dev_not_set(self, mock_urlopen):
+        """RHEL's lifecycle API doesn't expose development info, so begin_dev is absent."""
         result = get_distro_info()
         for ver in result.values():
-            assert ver["begin_dev"] == ver["begin_support"]
+            assert "begin_dev" not in ver
 
     def test_full_version_dates(self, mock_urlopen):
         result = get_distro_info()
@@ -174,5 +174,5 @@ class TestGetDistroInfo:
         mock_response = _make_mock_response(_FAKE_API_RESPONSE)
         mock_response.status = 503
         with patch("distro_support.rhel.request.urlopen", return_value=mock_response):
-            with pytest.raises(RuntimeError):
+            with pytest.raises(ConnectionError):
                 get_distro_info()
