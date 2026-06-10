@@ -246,5 +246,13 @@
     "end_support": "2027-11-01",
     "begin_dev": null,
     "end_extended_support": null
+  },
+  "3.24": {
+    "distribution": "alpine",
+    "version": "3.24",
+    "begin_support": "2026-06-09",
+    "end_support": "2028-06-01",
+    "begin_dev": null,
+    "end_extended_support": null
   }
 }
