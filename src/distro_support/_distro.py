@@ -1,6 +1,6 @@
-from typing import Optional
 import dataclasses
 import datetime
+
 from typing_extensions import Self
 
 from distro_support.errors import NoDevelopmentInfoError, NoESMInfoError
@@ -12,10 +12,10 @@ class SupportRange:
 
     distribution: str
     version: str
-    begin_support: Optional[datetime.date]
-    end_support: Optional[datetime.date]
-    begin_dev: Optional[datetime.date] = None
-    end_extended_support: Optional[datetime.date] = None
+    begin_support: datetime.date | None
+    end_support: datetime.date | None
+    begin_dev: datetime.date | None = None
+    end_extended_support: datetime.date | None = None
 
     def is_supported_on(
         self, date: datetime.date, *, include_esm: bool = False
@@ -32,11 +32,11 @@ class SupportRange:
             self.end_support is None or date <= self.end_support
         ):
             return True
-        if not include_esm or self.end_extended_support is None:
-            return False
-        if self.begin_support <= date <= self.end_extended_support:
-            return True
-        return False
+        return (
+            include_esm
+            and self.end_extended_support is not None
+            and self.begin_support <= date <= self.end_extended_support
+        )
 
     def is_in_development_on(self, date: datetime.date) -> bool:
         """Determine whether this item is still in development on the given date."""

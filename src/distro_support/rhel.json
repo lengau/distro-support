@@ -1,4 +1,18 @@
 {
+  "6": {
+    "distribution": "rhel",
+    "version": "6",
+    "begin_support": "2010-11-10",
+    "end_support": "2020-11-30",
+    "end_extended_support": "2024-06-30"
+  },
+  "7": {
+    "distribution": "rhel",
+    "version": "7",
+    "begin_support": "2014-06-10",
+    "end_support": "2024-06-30",
+    "end_extended_support": "2029-05-31"
+  },
   "8": {
     "distribution": "rhel",
     "version": "8",
