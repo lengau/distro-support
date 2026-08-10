@@ -1,8 +1,9 @@
 import datetime
+
 import pytest
+
 from distro_support._distro import SupportRange
 from distro_support.errors import NoDevelopmentInfoError, NoESMInfoError
-
 
 EMPTY_DISTRO = SupportRange(
     distribution="empty",

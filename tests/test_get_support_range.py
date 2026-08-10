@@ -1,6 +1,7 @@
 from datetime import date
 
 import pytest
+
 import distro_support
 from distro_support.errors import NoDevelopmentInfoError, NoESMInfoError
 
@@ -22,9 +23,9 @@ from distro_support.errors import NoDevelopmentInfoError, NoESMInfoError
         # Alpine has no begin_dev, so in_dev=None signals NoDevelopmentInfoError
         ("alpine", "3.20", date(2025, 1, 1), True, None, None),
         ("alpine", "3.17", date(2025, 1, 1), False, None, None),
-        ("rhel", "9", date(2023, 1, 1), True, False, False),
-        ("rhel", "9", date(2033, 1, 1), False, False, True),
-        ("rhel", "7", date(2025, 1, 1), False, False, True),
+        ("rhel", "9", date(2023, 1, 1), True, None, False),
+        ("rhel", "9", date(2033, 1, 1), False, None, True),
+        ("rhel", "7", date(2025, 1, 1), False, None, True),
     ],
 )
 def test_get_support_range(

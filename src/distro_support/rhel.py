@@ -1,6 +1,7 @@
 """Information about Red Hat Enterprise Linux support."""
 
 import json
+import pathlib
 from urllib import request
 
 SUPPORT_INFO_URL = "https://access.redhat.com/product-life-cycles/api/v1/products?name=Red+Hat+Enterprise+Linux"
@@ -18,6 +19,14 @@ def _parse_date(value: str | None) -> str | None:
 
 
 def get_distro_info() -> dict[str, dict[str, str | None]]:
+    series: dict[str, dict[str, str | None]] = {}
+    json_path = pathlib.Path(__file__).with_name("rhel.json")
+    if json_path.exists():
+        try:
+            series = json.loads(json_path.read_text())
+        except (json.JSONDecodeError, OSError):
+            series = {}
+
     req = request.Request(SUPPORT_INFO_URL, headers={"User-Agent": "distro-support"})
     with request.urlopen(req) as response:  # nosec B310
         if response.status != 200:
@@ -25,9 +34,8 @@ def get_distro_info() -> dict[str, dict[str, str | None]]:
         data = json.load(response)
 
     if not data.get("data"):
-        return {}
+        return series
 
-    series = {}
     for version in data["data"][0].get("versions", []):
         ver = version["name"]
         phases = {p["name"].lower(): p for p in version.get("phases", [])}

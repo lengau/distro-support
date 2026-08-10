@@ -128,7 +128,7 @@ class TestParseDate:
 class TestGetDistroInfo:
     def test_returns_all_versions(self, mock_urlopen):
         result = get_distro_info()
-        assert set(result.keys()) == {"9", "7", "6"}
+        assert set(result.keys()) == {"10", "9", "8", "7", "6"}
 
     def test_distribution_name(self, mock_urlopen):
         result = get_distro_info()
@@ -173,6 +173,8 @@ class TestGetDistroInfo:
     def test_http_error_raises(self):
         mock_response = _make_mock_response(_FAKE_API_RESPONSE)
         mock_response.status = 503
-        with patch("distro_support.rhel.request.urlopen", return_value=mock_response):
-            with pytest.raises(ConnectionError):
-                get_distro_info()
+        with (
+            patch("distro_support.rhel.request.urlopen", return_value=mock_response),
+            pytest.raises(ConnectionError),
+        ):
+            get_distro_info()

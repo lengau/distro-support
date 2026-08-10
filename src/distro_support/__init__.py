@@ -1,6 +1,7 @@
 import importlib
 import json
 import pathlib
+
 from distro_support._distro import SupportRange
 from distro_support.errors import UnknownDistributionError, UnknownVersionError
 
