@@ -45,9 +45,9 @@ jobs:
         run: |
           make setup-lint UV_PYTHON=/usr/bin/python3
           make format
-          git add **.json
+          git add src/distro_support/*.json
           uvx pre-commit run || true
-          git add **.json
+          git add src/distro_support/*.json
           git config --global user.name "Update bot"
           git config --global user.email "update[bot]@github.com"
           git commit -m "chore: update metadata files"
