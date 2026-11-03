@@ -90,7 +90,7 @@ jobs:
             rockylinux/9
             ubuntu:22.04
             ubuntu:24.04
-            ubuntu-minimal-daily:26.04
+            ubuntu-minimal:26.04
           )
           # Mint images are not available for arm64
           if [[ "${{ matrix.runner }}" != *arm* ]]; then
