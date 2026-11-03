@@ -50,7 +50,7 @@ jobs:
           git add **.json
           git config --global user.name "Update bot"
           git config --global user.email "update[bot]@github.com"
-          git commit -am "chore: update metadata files"
+          git commit -m "chore: update metadata files"
           if git symbolic-ref -q HEAD; then
             git push
           fi
