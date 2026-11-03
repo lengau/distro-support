@@ -85,7 +85,7 @@ jobs:
             devuan/excalibur
             fedora/43
             kali
-            opensuse/15.6
+            opensuse/16.0
             opensuse/tumbleweed
             rockylinux/9
             ubuntu:22.04
