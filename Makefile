@@ -40,7 +40,7 @@ endif
 
 # Used for installing build dependencies in CI.
 .PHONY: install-build-deps
-install-build-deps: install-lint-build-deps
+install-build-deps:
 ifeq ($(APT_PACKAGES),)
 else ifeq ($(shell which apt-get),)
 	$(warning Cannot install build dependencies without apt.)
@@ -51,7 +51,7 @@ endif
 
 # If additional build dependencies need installing in order to build the linting env.
 .PHONY: install-lint-build-deps
-install-lint-build-deps: install-ty
+install-lint-build-deps: install-build-deps install-ty
 
 .PHONY: lint-ty
 lint-ty: install-ty
