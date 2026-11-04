@@ -358,5 +358,13 @@
     "end_support": "2027-07-15",
     "begin_dev": "2026-04-24",
     "end_extended_support": null
+  },
+  "27.04": {
+    "distribution": "ubuntu",
+    "version": "27.04",
+    "begin_support": "2027-04-22",
+    "end_support": "2028-01-20",
+    "begin_dev": "2026-10-16",
+    "end_extended_support": null
   }
 }
