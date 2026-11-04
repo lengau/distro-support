@@ -26,6 +26,12 @@ from distro_support.errors import NoDevelopmentInfoError, NoESMInfoError
         ("rhel", "9", date(2023, 1, 1), True, None, False),
         ("rhel", "9", date(2033, 1, 1), False, None, True),
         ("rhel", "7", date(2025, 1, 1), False, None, True),
+        ("linuxmint", "21.3", date(2023, 1, 1), False, True, None),
+        ("linuxmint", "21.3", date(2024, 6, 1), True, False, None),
+        ("linuxmint", "21.3", date(2028, 1, 1), False, False, None),
+        ("linuxmint", "22", date(2025, 1, 1), True, False, None),
+        ("linuxmint", "lmde6", date(2024, 1, 1), True, False, None),
+        ("mint", "21.3", date(2024, 6, 1), True, False, None),
     ],
 )
 def test_get_support_range(
