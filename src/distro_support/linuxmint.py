@@ -1,11 +1,10 @@
 """Information about Linux Mint support."""
 
-import http.client
 import json
 import pathlib
 from urllib import request
 
-SUPPORT_INFO_URL = "http://packages.linuxmint.com/releases.json"
+SUPPORT_INFO_URL = "http://packages.linuxmint.com/releases.json"  # nosec B310
 
 UBUNTU_SERIES_TO_VERSION = {
     "precise": "12.04",
@@ -130,12 +129,45 @@ def _load_upstream_data(distribution: str) -> dict[str, dict[str, str | None]]:
     return json.loads(path.read_text())
 
 
-def get_distro_info() -> dict[str, dict[str, str | None]]:
-    response: http.client.HTTPResponse = request.urlopen(SUPPORT_INFO_URL, timeout=10)
-    if response.status != 200:
-        raise ConnectionError(response.status)
+def _build_entry(
+    version_str: str,
+    base: str,
+    ubuntu_info: dict[str, dict[str, str | None]],
+    debian_info: dict[str, dict[str, str | None]],
+) -> dict[str, str | None] | None:
+    upstream_info: dict[str, str | None] | None = None
+    if base in UBUNTU_SERIES_TO_VERSION:
+        u_ver = UBUNTU_SERIES_TO_VERSION[base]
+        upstream_info = ubuntu_info.get(u_ver)
+    elif base in DEBIAN_SERIES_TO_VERSION:
+        d_ver = DEBIAN_SERIES_TO_VERSION[base]
+        upstream_info = debian_info.get(d_ver)
 
-    mint_data = json.load(response)
+    if not upstream_info:
+        return None
+
+    begin_support = KNOWN_RELEASE_DATES.get(version_str) or upstream_info.get(
+        "begin_support"
+    )
+    return {
+        "distribution": "linuxmint",
+        "version": version_str,
+        "begin_support": begin_support,
+        "end_support": upstream_info.get("end_support"),
+        "begin_dev": upstream_info.get("begin_dev"),
+        "end_extended_support": None,
+    }
+
+
+def get_distro_info() -> dict[str, dict[str, str | None]]:
+    if not SUPPORT_INFO_URL.startswith(("http://", "https://")):
+        raise ValueError(f"Invalid URL: {SUPPORT_INFO_URL}")
+
+    req = request.Request(SUPPORT_INFO_URL, headers={"User-Agent": "distro-support"})
+    with request.urlopen(req, timeout=10) as response:  # nosec B310
+        if response.status != 200:
+            raise ConnectionError(response.status)
+        mint_data = json.load(response)
 
     ubuntu_info = _load_upstream_data("ubuntu")
     debian_info = _load_upstream_data("debian")
@@ -153,31 +185,10 @@ def get_distro_info() -> dict[str, dict[str, str | None]]:
         if not base:
             continue
 
-        upstream_info: dict[str, str | None] | None = None
-        if base in UBUNTU_SERIES_TO_VERSION:
-            u_ver = UBUNTU_SERIES_TO_VERSION[base]
-            upstream_info = ubuntu_info.get(u_ver)
-        elif base in DEBIAN_SERIES_TO_VERSION:
-            d_ver = DEBIAN_SERIES_TO_VERSION[base]
-            upstream_info = debian_info.get(d_ver)
-
-        if not upstream_info:
+        entry = _build_entry(version_str, base, ubuntu_info, debian_info)
+        if not entry:
             continue
 
-        begin_support = KNOWN_RELEASE_DATES.get(version_str) or upstream_info.get(
-            "begin_support"
-        )
-        end_support = upstream_info.get("end_support")
-        begin_dev = upstream_info.get("begin_dev")
-
-        entry = {
-            "distribution": "linuxmint",
-            "version": version_str,
-            "begin_support": begin_support,
-            "end_support": end_support,
-            "begin_dev": begin_dev,
-            "end_extended_support": None,
-        }
         series[version_str] = entry
 
         # LMDE releases use both numeric and prefixed identifiers in practice.
