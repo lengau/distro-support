@@ -1,0 +1,322 @@
+{
+  "1": {
+    "distribution": "linuxmint",
+    "version": "1",
+    "begin_support": "2010-09-07",
+    "end_support": "2016-04-25",
+    "begin_dev": "2011-02-06",
+    "end_extended_support": null
+  },
+  "2": {
+    "distribution": "linuxmint",
+    "version": "2",
+    "begin_support": "2015-04-10",
+    "end_support": "2018-06-17",
+    "begin_dev": "2013-05-04",
+    "end_extended_support": null
+  },
+  "3": {
+    "distribution": "linuxmint",
+    "version": "3",
+    "begin_support": "2018-08-31",
+    "end_support": "2020-07-18",
+    "begin_dev": "2015-04-26",
+    "end_extended_support": null
+  },
+  "4": {
+    "distribution": "linuxmint",
+    "version": "4",
+    "begin_support": "2020-03-20",
+    "end_support": "2022-09-10",
+    "begin_dev": "2017-06-17",
+    "end_extended_support": null
+  },
+  "5": {
+    "distribution": "linuxmint",
+    "version": "5",
+    "begin_support": "2022-03-20",
+    "end_support": "2024-08-14",
+    "begin_dev": "2019-07-06",
+    "end_extended_support": null
+  },
+  "6": {
+    "distribution": "linuxmint",
+    "version": "6",
+    "begin_support": "2023-09-27",
+    "end_support": "2026-07-11",
+    "begin_dev": "2021-08-14",
+    "end_extended_support": null
+  },
+  "7": {
+    "distribution": "linuxmint",
+    "version": "7",
+    "begin_support": "2025-10-14",
+    "end_support": "2028-08-09",
+    "begin_dev": "2023-06-10",
+    "end_extended_support": null
+  },
+  "13": {
+    "distribution": "linuxmint",
+    "version": "13",
+    "begin_support": "2012-05-23",
+    "end_support": "2017-04-28",
+    "begin_dev": "2011-10-13",
+    "end_extended_support": null
+  },
+  "17": {
+    "distribution": "linuxmint",
+    "version": "17",
+    "begin_support": "2014-05-31",
+    "end_support": "2019-04-25",
+    "begin_dev": "2013-10-17",
+    "end_extended_support": null
+  },
+  "17.1": {
+    "distribution": "linuxmint",
+    "version": "17.1",
+    "begin_support": "2014-11-29",
+    "end_support": "2019-04-25",
+    "begin_dev": "2013-10-17",
+    "end_extended_support": null
+  },
+  "17.2": {
+    "distribution": "linuxmint",
+    "version": "17.2",
+    "begin_support": "2015-06-30",
+    "end_support": "2019-04-25",
+    "begin_dev": "2013-10-17",
+    "end_extended_support": null
+  },
+  "17.3": {
+    "distribution": "linuxmint",
+    "version": "17.3",
+    "begin_support": "2015-12-04",
+    "end_support": "2019-04-25",
+    "begin_dev": "2013-10-17",
+    "end_extended_support": null
+  },
+  "18": {
+    "distribution": "linuxmint",
+    "version": "18",
+    "begin_support": "2016-06-30",
+    "end_support": "2021-04-30",
+    "begin_dev": "2015-10-22",
+    "end_extended_support": null
+  },
+  "18.1": {
+    "distribution": "linuxmint",
+    "version": "18.1",
+    "begin_support": "2016-12-16",
+    "end_support": "2021-04-30",
+    "begin_dev": "2015-10-22",
+    "end_extended_support": null
+  },
+  "18.2": {
+    "distribution": "linuxmint",
+    "version": "18.2",
+    "begin_support": "2017-07-02",
+    "end_support": "2021-04-30",
+    "begin_dev": "2015-10-22",
+    "end_extended_support": null
+  },
+  "18.3": {
+    "distribution": "linuxmint",
+    "version": "18.3",
+    "begin_support": "2017-11-27",
+    "end_support": "2021-04-30",
+    "begin_dev": "2015-10-22",
+    "end_extended_support": null
+  },
+  "19": {
+    "distribution": "linuxmint",
+    "version": "19",
+    "begin_support": "2018-06-29",
+    "end_support": "2023-05-31",
+    "begin_dev": "2017-10-19",
+    "end_extended_support": null
+  },
+  "19.1": {
+    "distribution": "linuxmint",
+    "version": "19.1",
+    "begin_support": "2018-12-19",
+    "end_support": "2023-05-31",
+    "begin_dev": "2017-10-19",
+    "end_extended_support": null
+  },
+  "19.2": {
+    "distribution": "linuxmint",
+    "version": "19.2",
+    "begin_support": "2019-08-02",
+    "end_support": "2023-05-31",
+    "begin_dev": "2017-10-19",
+    "end_extended_support": null
+  },
+  "19.3": {
+    "distribution": "linuxmint",
+    "version": "19.3",
+    "begin_support": "2019-12-18",
+    "end_support": "2023-05-31",
+    "begin_dev": "2017-10-19",
+    "end_extended_support": null
+  },
+  "20": {
+    "distribution": "linuxmint",
+    "version": "20",
+    "begin_support": "2020-06-27",
+    "end_support": "2025-05-29",
+    "begin_dev": "2019-10-17",
+    "end_extended_support": null
+  },
+  "20.1": {
+    "distribution": "linuxmint",
+    "version": "20.1",
+    "begin_support": "2021-01-08",
+    "end_support": "2025-05-29",
+    "begin_dev": "2019-10-17",
+    "end_extended_support": null
+  },
+  "20.2": {
+    "distribution": "linuxmint",
+    "version": "20.2",
+    "begin_support": "2021-07-08",
+    "end_support": "2025-05-29",
+    "begin_dev": "2019-10-17",
+    "end_extended_support": null
+  },
+  "20.3": {
+    "distribution": "linuxmint",
+    "version": "20.3",
+    "begin_support": "2022-01-07",
+    "end_support": "2025-05-29",
+    "begin_dev": "2019-10-17",
+    "end_extended_support": null
+  },
+  "21": {
+    "distribution": "linuxmint",
+    "version": "21",
+    "begin_support": "2022-07-31",
+    "end_support": "2027-06-01",
+    "begin_dev": "2021-10-14",
+    "end_extended_support": null
+  },
+  "21.1": {
+    "distribution": "linuxmint",
+    "version": "21.1",
+    "begin_support": "2022-12-20",
+    "end_support": "2027-06-01",
+    "begin_dev": "2021-10-14",
+    "end_extended_support": null
+  },
+  "21.2": {
+    "distribution": "linuxmint",
+    "version": "21.2",
+    "begin_support": "2023-07-16",
+    "end_support": "2027-06-01",
+    "begin_dev": "2021-10-14",
+    "end_extended_support": null
+  },
+  "21.3": {
+    "distribution": "linuxmint",
+    "version": "21.3",
+    "begin_support": "2024-01-12",
+    "end_support": "2027-06-01",
+    "begin_dev": "2021-10-14",
+    "end_extended_support": null
+  },
+  "22": {
+    "distribution": "linuxmint",
+    "version": "22",
+    "begin_support": "2024-07-25",
+    "end_support": "2029-05-31",
+    "begin_dev": "2023-10-12",
+    "end_extended_support": null
+  },
+  "22.1": {
+    "distribution": "linuxmint",
+    "version": "22.1",
+    "begin_support": "2025-01-14",
+    "end_support": "2029-05-31",
+    "begin_dev": "2023-10-12",
+    "end_extended_support": null
+  },
+  "22.2": {
+    "distribution": "linuxmint",
+    "version": "22.2",
+    "begin_support": "2025-09-04",
+    "end_support": "2029-05-31",
+    "begin_dev": "2023-10-12",
+    "end_extended_support": null
+  },
+  "22.3": {
+    "distribution": "linuxmint",
+    "version": "22.3",
+    "begin_support": "2026-01-11",
+    "end_support": "2029-05-31",
+    "begin_dev": "2023-10-12",
+    "end_extended_support": null
+  },
+  "27": {
+    "distribution": "linuxmint",
+    "version": "27",
+    "begin_support": "2026-08-01",
+    "end_support": "2031-05-29",
+    "begin_dev": "2025-10-09",
+    "end_extended_support": null
+  },
+  "lmde1": {
+    "distribution": "linuxmint",
+    "version": "lmde1",
+    "begin_support": "2010-09-07",
+    "end_support": "2016-04-25",
+    "begin_dev": "2011-02-06",
+    "end_extended_support": null
+  },
+  "lmde2": {
+    "distribution": "linuxmint",
+    "version": "lmde2",
+    "begin_support": "2015-04-10",
+    "end_support": "2018-06-17",
+    "begin_dev": "2013-05-04",
+    "end_extended_support": null
+  },
+  "lmde3": {
+    "distribution": "linuxmint",
+    "version": "lmde3",
+    "begin_support": "2018-08-31",
+    "end_support": "2020-07-18",
+    "begin_dev": "2015-04-26",
+    "end_extended_support": null
+  },
+  "lmde4": {
+    "distribution": "linuxmint",
+    "version": "lmde4",
+    "begin_support": "2020-03-20",
+    "end_support": "2022-09-10",
+    "begin_dev": "2017-06-17",
+    "end_extended_support": null
+  },
+  "lmde5": {
+    "distribution": "linuxmint",
+    "version": "lmde5",
+    "begin_support": "2022-03-20",
+    "end_support": "2024-08-14",
+    "begin_dev": "2019-07-06",
+    "end_extended_support": null
+  },
+  "lmde6": {
+    "distribution": "linuxmint",
+    "version": "lmde6",
+    "begin_support": "2023-09-27",
+    "end_support": "2026-07-11",
+    "begin_dev": "2021-08-14",
+    "end_extended_support": null
+  },
+  "lmde7": {
+    "distribution": "linuxmint",
+    "version": "lmde7",
+    "begin_support": "2025-10-14",
+    "end_support": "2028-08-09",
+    "begin_dev": "2023-06-10",
+    "end_extended_support": null
+  }
+}

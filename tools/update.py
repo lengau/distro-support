@@ -4,12 +4,17 @@ import json
 import pathlib
 import sys
 
-from distro_support import alpine, debian, devuan, rhel, ubuntu
+from distro_support import alpine, debian, devuan, linuxmint, rhel, ubuntu
 
 
 def _version_sort_key(version: str) -> tuple[int, ...]:
     if not version:
         return (sys.maxsize,)
+    if version.startswith("lmde"):
+        try:
+            return (1000, *(int(x) for x in version.removeprefix("lmde").split(".")))
+        except ValueError:
+            return (1000, 0)
     try:
         return tuple(int(x) for x in version.split("."))
     except ValueError:
@@ -36,3 +41,5 @@ if __name__ == "__main__":
     update(alpine)
     print("Updating RHEL data")
     update(rhel)
+    print("Updating Linux Mint data")
+    update(linuxmint)
